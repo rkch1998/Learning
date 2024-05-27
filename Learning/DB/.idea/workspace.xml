@@ -5,26 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72fc35fe-d7ec-4233-bb4a-a2d7945e27cd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/result.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DbApplication.jar" beforeDir="false" afterPath="$PROJECT_DIR$/DbApplication.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$ConfigLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$ConfigLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$DatabaseExecutor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$DatabaseExecutor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionWriter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/DbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/connect/DB/DbApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/data/DataBaseConnect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/data/DatabaseExecutor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/data/DatabaseOperations.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/entities/Function.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/service/FunctionProcessor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/util/ConfigLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/util/FunctionWriter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbconfig.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/functions.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/connect/DB/DbApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dbconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dbconfig.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +56,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "android.gradle.sync.needed": "true",
     "git-widget-placeholder": "practice",
+    "last_opened_file_path": "D:/Learn/GitHub/Ravi/LearningV1/Learning/DB",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"

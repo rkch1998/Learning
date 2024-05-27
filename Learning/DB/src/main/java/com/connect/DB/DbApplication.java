@@ -1,8 +1,9 @@
 package com.connect.DB;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.sql.*;
 import java.util.*;
 
@@ -10,14 +11,15 @@ public class DbApplication {
 
 	public static void main(String[] args) {
 
-		if (args.length != 3) {
-			System.out.println("Usage: java DbApplication <inputFilePath> <outputFilePath> <dbName>");
+		if (args.length != 2) {
+//			System.out.println("Usage: java DbApplication <inputFilePath> <outputFilePath> <dbName>");
+			System.out.println("Usage: java DbApplication <inputFilePath> <dbName>");
 			return;
 		}
 
 		String inputFilePath = args[0];
-		String outputFilePath = args[1];
-		String dbName = args[2];
+//		String outputFilePath = args[1];
+		String dbName = args[1];
 
 		try {
 			// Load database configurations
@@ -38,16 +40,55 @@ public class DbApplication {
 					configLoader.getProperty("db.tenant.username"),
 					configLoader.getProperty("db.tenant.password")
 			});
+			dbConfigs.put("log", new String[]{
+					configLoader.getProperty("db.log.url"),
+					configLoader.getProperty("db.log.username"),
+					configLoader.getProperty("db.log.password")
+			});
+			dbConfigs.put("admin", new String[]{
+					configLoader.getProperty("db.admin.url"),
+					configLoader.getProperty("db.admin.username"),
+					configLoader.getProperty("db.admin.password")
+			});
 
 			// Initialize dependencies
 			DatabaseExecutor databaseExecutor = new DatabaseExecutor(dbConfigs);
 			FunctionWriter fileWriter = new FunctionWriter();
 			FunctionProcessor functionProcessor = new FunctionProcessor(databaseExecutor, fileWriter);
 
+			// Generate output file name
+			String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+			String outputFileName = String.format("%s_%s.sql", dbName, timestamp);
+			Path outputFilePath = Path.of(outputFileName);
+			System.out.println("Path : " + outputFilePath);
+			// Move existing file to archive if it exists
+			moveToArchive();
+
 			// Process functions from file
-			functionProcessor.processFunctionsFromFile(inputFilePath, outputFilePath, dbName);
+			functionProcessor.processFunctionsFromFile(inputFilePath, outputFilePath.toString(), dbName);
 		} catch (SQLException e) {
 			System.out.println("Error connecting to database: " + e.getMessage());
+		}
+	}
+
+	private static void moveToArchive() {
+		try {
+			Path currentDir = Path.of(".");
+			Path archiveDir = Path.of("archive");
+			if (!Files.exists(archiveDir)) {
+				Files.createDirectories(archiveDir);
+			}
+
+			DirectoryStream.Filter<Path> filter = entry -> entry.toString().endsWith(".sql");
+			try (DirectoryStream<Path> stream = Files.newDirectoryStream(currentDir, filter)) {
+				for (Path entry : stream) {
+					Path archiveFilePath = archiveDir.resolve(entry.getFileName());
+					Files.move(entry, archiveFilePath, StandardCopyOption.REPLACE_EXISTING);
+					System.out.println("Moved file to archive: " + archiveFilePath);
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("Error moving files to archive: " + e.getMessage());
 		}
 	}
 
