@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fc35fe-d7ec-4233-bb4a-a2d7945e27cd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DbApplication.jar" beforeDir="false" afterPath="$PROJECT_DIR$/DbApplication.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$ConfigLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$ConfigLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$DatabaseExecutor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$DatabaseExecutor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication$FunctionWriter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/connect/DB/DbApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/connect/DB/DbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/connect/DB/DbApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dbconfig.properties" afterDir="false" />
-    </list>
+    <list default="true" id="72fc35fe-d7ec-4233-bb4a-a2d7945e27cd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
