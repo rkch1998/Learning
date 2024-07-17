@@ -5,16 +5,19 @@ Q. Explain the difference between processes and threads.
 	
 	Memory usage: Processes have their own separate memory space, which can be useful for isolating different parts of an 
 			application and preventing bugs and security issues. However, this also means that data cannot be shared 
-			between processes without explicit communication mechanisms. Threads, on the other hand, share the same 
+			between processes without explicit communication mechanisms. 
+			Threads, on the other hand, share the same 
 			memory space and can easily access and modify shared data, but this can also lead to data race and synchronization issues.
 			
 	System resource allocation: Each process has its own system resources, such as file handles and network connections, 
-			which are not shared with other processes. Threads share the same system resources as the parent process, 
+			which are not shared with other processes. 
+			Threads share the same system resources as the parent process, 
 			which can improve efficiency and reduce overhead, but also requires careful management to prevent resource 
 			conflicts and contention.
 			
 	Parallelism and concurrency: Processes can run completely independently of each other, allowing for true parallelism on 
-			multi-core machines. Threads run within the same process and share the same CPU time, which can provide 
+			multi-core machines. 
+			Threads run within the same process and share the same CPU time, which can provide 
 			concurrency but not necessarily true parallelism. 
 
 	
