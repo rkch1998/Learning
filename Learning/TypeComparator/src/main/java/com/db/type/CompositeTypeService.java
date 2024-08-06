@@ -53,44 +53,63 @@ public class CompositeTypeService {
         return compositeTypes;
     }
 
-    public void compareAndExport() {
-        config.fields().forEachRemaining(databaseEntry -> {
+    public void compareAndExport(String environment) {
+        JsonNode envConfig = config.path(environment);
+
+        if (envConfig.isMissingNode()) {
+            throw new IllegalArgumentException("Environment " + environment + " not found in configuration.");
+        }
+
+        envConfig.fields().forEachRemaining(databaseEntry -> {
             String dbName = databaseEntry.getKey();
             JsonNode databaseConfig = databaseEntry.getValue();
 
-            // Configure data sources dynamically
-            DataSource sourceDataSource = DatabaseUtil.createDataSource(databaseConfig.path("sourceClient"));
-            DataSource targetDataSource = DatabaseUtil.createDataSource(databaseConfig.path("targetClient"));
+            DataSource sourceDataSource = null;
+            DataSource targetDataSource = null;
 
-            JdbcTemplate sourceJdbcTemplate = new JdbcTemplate(sourceDataSource);
-            JdbcTemplate targetJdbcTemplate = new JdbcTemplate(targetDataSource);
+            try {
+                // Configure data sources dynamically
+                sourceDataSource = DatabaseUtil.createDataSource(databaseConfig.path("sourceClient"));
+                targetDataSource = DatabaseUtil.createDataSource(databaseConfig.path("targetClient"));
 
-            StringBuilder sqlCommands = new StringBuilder();
+                JdbcTemplate sourceJdbcTemplate = new JdbcTemplate(sourceDataSource);
+                JdbcTemplate targetJdbcTemplate = new JdbcTemplate(targetDataSource);
 
-            // Fetch the schema names for the current database
-            JsonNode namespaces = databaseConfig.path("schemaCompare").path("namespaces");
+                StringBuilder sqlCommands = new StringBuilder();
 
-            for (JsonNode namespace : namespaces) {
-                String schemaName = namespace.asText();
+                // Fetch the schema names for the current database
+                JsonNode namespaces = databaseConfig.path("schemaCompare").path("namespaces");
 
-                // Fetch and compare types
-                Map<String, String> sourceCompositeTypes = getCompositeTypes(sourceJdbcTemplate, schemaName);
-                Map<String, String> targetCompositeTypes = getCompositeTypes(targetJdbcTemplate, schemaName);
+                for (JsonNode namespace : namespaces) {
+                    String schemaName = namespace.asText();
 
-                // Compare types and generate SQL commands
-                Map<String, String> commands = scriptGenerator.compareTypes(sourceCompositeTypes, targetCompositeTypes);
+                    // Fetch and compare types
+                    Map<String, String> sourceCompositeTypes = getCompositeTypes(sourceJdbcTemplate, schemaName);
+                    Map<String, String> targetCompositeTypes = getCompositeTypes(targetJdbcTemplate, schemaName);
 
-                // Append commands to the aggregated SQL
-                for (String command : commands.values()) {
-                    sqlCommands.append(command).append("\n");
+                    // Compare types and generate SQL commands
+                    Map<String, String> commands = scriptGenerator.compareTypes(sourceCompositeTypes, targetCompositeTypes);
+
+                    // Append commands to the aggregated SQL
+                    for (String command : commands.values()) {
+                        sqlCommands.append(command).append("\n");
+                    }
                 }
-            }
 
-            // Write all schema changes for this database to a single file
-            if (!sqlCommands.toString().isEmpty()) {
-                fileWriter.writeToFile(sqlCommands.toString(), dbName);
-            } else {
-                System.out.println("No Changes found in " + dbName);
+                // Write all schema changes for this database to a single file
+                if (!sqlCommands.toString().isEmpty()) {
+                    fileWriter.writeToFile(sqlCommands.toString(), dbName);
+                } else {
+                    System.out.println("No Changes found in " + dbName);
+                }
+            } finally {
+                if (sourceDataSource != null) {
+                    DatabaseUtil.closeDataSource(sourceDataSource);
+                }
+                if (targetDataSource != null) {
+                    DatabaseUtil.closeDataSource(targetDataSource);
+                }
+                DatabaseUtil.closeSshTunnel();
             }
         });
     }

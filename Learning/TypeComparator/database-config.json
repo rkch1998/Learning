@@ -1,217 +1,289 @@
 {
-    "devGSPTenant": {
-		"sourceClient": {
-			"host": "103.158.108.17",
-			"port": 5432,
-			"database": "1_CygnetGSPTenant_1",
-			"user": "CygGSPDBA",
-			"password": "Admin#321"
+	"fe" : {
+		"devGSPTenant": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.17",
+				"port": 5432,
+				"database": "1_CygnetGSPTenant_1",
+				"user": "CygGSPDBA",
+				"password": "Admin#321",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "1_CygnetGSPTenant_1",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"Logging",
+					"api",
+					"archive",
+					"audit",
+					"common",
+					"einvoice",
+					"ewaybill",
+					"gl",
+					"gst",
+					"import",
+					"isd",
+					"jobwork",
+					"litigation",
+					"notice",
+					"oregular",
+					"report",
+					"subscriber",
+					"tcs",
+					"tds"
+				]
+			}
+			
 		},
-		"targetClient": {
-			"host": "103.158.108.18",
-			"port": 5432,
-			"database": "1_CygnetGSPTenant_1",
-			"user": "CygGSPDBA",
-			"password": "th3dB@1sh3r3"
+		"devGSPMaster": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.17",
+				"port": 5432,
+				"database": "CygnetGSPMaster",
+				"user": "CygGSPDBA",
+				"password": "Admin#321",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPMaster",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
 		},
-        "schemaCompare": {
-            "namespaces": [
-                "Logging",
-                "api",
-                "archive",
-                "audit",
-                "common",
-                "einvoice",
-                "ewaybill",
-                "gl",
-                "gst",
-                "import",
-                "isd",
-                "jobwork",
-                "litigation",
-                "notice",
-                "oregular",
-                "report",
-                "subscriber",
-                "tcs",
-                "tds"
-            ]
-        }
-		
-	},
-    "devGSPMaster": {
-		"sourceClient": {
-			"host": "103.158.108.17",
-			"port": 5432,
-			"database": "CygnetGSPMaster",
-			"user": "CygGSPDBA",
-			"password": "Admin#321"
+		"devGSPAppdata": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.17",
+				"port": 5432,
+				"database": "CygnetGSPAppData",
+				"user": "CygGSPDBA",
+				"password": "Admin#321",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPAppData",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
 		},
-		"targetClient": {
-			"host": "103.158.108.18",
-			"port": 5432,
-			"database": "CygnetGSPMaster",
-			"user": "CygGSPDBA",
-			"password": "th3dB@1sh3r3"
+		"devGSPLog": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.17",
+				"port": 5432,
+				"database": "CygnetGSPLog",
+				"user": "CygGSPDBA",
+				"password": "Admin#321",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPLog",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
 		},
-        "schemaCompare": {
-            "namespaces": [
-                "archive",
-                "ap",
-                "app",
-                "audit",
-                "common",
-                "dct",
-                "master",
-                "subscriber"
-            ]
-        }
-		
-	},
-    "devGSPAppdata": {
-		"sourceClient": {
-			"host": "103.158.108.17",
-			"port": 5432,
-			"database": "CygnetGSPAppData",
-			"user": "CygGSPDBA",
-			"password": "Admin#321"
+		"devGSPMetadata": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.17",
+				"port": 5432,
+				"database": "CygnetGSPMetadata",
+				"user": "CygGSPDBA",
+				"password": "Admin#321",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPMetadata",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
 		},
-		"targetClient": {
-			"host": "103.158.108.18",
-			"port": 5432,
-			"database": "CygnetGSPAppData",
-			"user": "CygGSPDBA",
-			"password": "th3dB@1sh3r3"
+		"devGSPAdmin": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.17",
+				"port": 5432,
+				"database": "CygnetGSPAdmin",
+				"user": "CygGSPDBA",
+				"password": "Admin#321",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPAdmin",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
 		},
-        "schemaCompare": {
-            "namespaces": [
-                "archive",
-                "ap",
-                "app",
-                "audit",
-                "common",
-                "dct",
-                "master",
-                "subscriber"
-            ]
-        }
-		
-	},
-    "devGSPLog": {
-		"sourceClient": {
-			"host": "103.158.108.17",
-			"port": 5432,
-			"database": "CygnetGSPLog",
-			"user": "CygGSPDBA",
-			"password": "Admin#321"
-		},
-		"targetClient": {
-			"host": "103.158.108.18",
-			"port": 5432,
-			"database": "CygnetGSPLog",
-			"user": "CygGSPDBA",
-			"password": "th3dB@1sh3r3"
-		},
-        "schemaCompare": {
-            "namespaces": [
-                "archive",
-                "ap",
-                "app",
-                "audit",
-                "common",
-                "dct",
-                "master",
-                "subscriber"
-            ]
-        }
-		
-	},
-    "devGSPMetadata": {
-		"sourceClient": {
-			"host": "103.158.108.17",
-			"port": 5432,
-			"database": "CygnetGSPMetadata",
-			"user": "CygGSPDBA",
-			"password": "Admin#321"
-		},
-		"targetClient": {
-			"host": "103.158.108.18",
-			"port": 5432,
-			"database": "CygnetGSPMetadata",
-			"user": "CygGSPDBA",
-			"password": "th3dB@1sh3r3"
-		},
-        "schemaCompare": {
-            "namespaces": [
-                "archive",
-                "ap",
-                "app",
-                "audit",
-                "common",
-                "dct",
-                "master",
-                "subscriber"
-            ]
-        }
-		
-	},
-    "devGSPAdmin": {
-		"sourceClient": {
-			"host": "103.158.108.17",
-			"port": 5432,
-			"database": "CygnetGSPAdmin",
-			"user": "CygGSPDBA",
-			"password": "Admin#321"
-		},
-		"targetClient": {
-			"host": "103.158.108.18",
-			"port": 5432,
-			"database": "CygnetGSPAdmin",
-			"user": "CygGSPDBA",
-			"password": "th3dB@1sh3r3"
-		},
-        "schemaCompare": {
-            "namespaces": [
-                "archive",
-                "ap",
-                "app",
-                "audit",
-                "common",
-                "dct",
-                "master",
-                "subscriber"
-            ]
-        }
-		
-	},
-    "devGSPArchival": {
-		"sourceClient": {
-			"host": "103.158.108.17",
-			"port": 5432,
-			"database": "1_CygnetGSPArchival_1",
-			"user": "CygGSPDBA",
-			"password": "Admin#321"
-		},
-		"targetClient": {
-			"host": "103.158.108.18",
-			"port": 5432,
-			"database": "1_CygnetGSPArchival_1",
-			"user": "CygGSPDBA",
-			"password": "th3dB@1sh3r3"
-		},
-        "schemaCompare": {
-            "namespaces": [
-                "archive",
-                "ap",
-                "app",
-                "audit",
-                "common",
-                "dct",
-                "master",
-                "subscriber"
-            ]
-        }
-		
-	}
+		"devGSPArchival": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.17",
+				"port": 5432,
+				"database": "1_CygnetGSPArchival_1",
+				"user": "CygGSPDBA",
+				"password": "Admin#321",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "1_CygnetGSPArchival_1",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3",
+				"ssh_host": "00.00.00.00",
+				"ssh_port": 22,
+				"ssh_username": "ubuntu",
+				"ssh_private_key": "D:\\Cygnet\\BastionHost.pem"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
+		}
 
+	}
 }

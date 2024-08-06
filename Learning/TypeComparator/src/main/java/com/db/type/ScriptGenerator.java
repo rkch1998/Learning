@@ -15,14 +15,20 @@ public class ScriptGenerator {
         for (Map.Entry<String, String> entry : sourceCompositeTypes.entrySet()) {
             String typeName = entry.getKey();
             String sourceDefinition = entry.getValue();
-
+            
+            StringBuilder typeCommands = new StringBuilder();
+            
             if (!targetCompositeTypes.containsKey(typeName)) {
-                sqlCommands.put(typeName, "CREATE TYPE " + typeName + " AS (" + formatAttributes(sourceDefinition) + ");\n");
+                typeCommands.append("CREATE TYPE ").append(typeName).append(" AS (").append(formatAttributes(sourceDefinition)).append(");\n");
             } else {
                 String targetDefinition = targetCompositeTypes.get(typeName);
 
                 // Handle attribute changes
-                handleAttributeChanges(typeName, sourceDefinition, targetDefinition, sqlCommands);
+                handleAttributeChanges(typeName, sourceDefinition, targetDefinition, typeCommands);
+            }
+            
+            if (typeCommands.length() > 0) {
+                sqlCommands.put(typeName, typeCommands.toString());
             }
         }
 
@@ -36,7 +42,7 @@ public class ScriptGenerator {
         return sqlCommands;
     }
 
-    private void handleAttributeChanges(String typeName, String sourceDefinition, String targetDefinition, Map<String, String> sqlCommands) {
+    private void handleAttributeChanges(String typeName, String sourceDefinition, String targetDefinition, StringBuilder typeCommands) {
         Map<String, String> sourceAttributes = extractAttributesWithTypes(sourceDefinition);
         Map<String, String> targetAttributes = extractAttributesWithTypes(targetDefinition);
 
@@ -44,23 +50,20 @@ public class ScriptGenerator {
             String attrName = entry.getKey();
             String sourceDataType = entry.getValue();
 
-            // Check for dropped types in the source
             if (!targetAttributes.containsKey(attrName)) {
-                sqlCommands.put(typeName, "ALTER TYPE " + typeName + " ADD ATTRIBUTE \"" + attrName + "\" " + sourceDataType + ";\n");
+                typeCommands.append("ALTER TYPE ").append(typeName).append(" ADD ATTRIBUTE \"").append(attrName).append("\" ").append(sourceDataType).append(";\n");
             } else {
                 String targetDataType = targetAttributes.get(attrName);
 
-                // Check for dropped types in the source
                 if (!sourceDataType.equals(targetDataType)) {
-                    sqlCommands.put(typeName, "ALTER TYPE " + typeName + " ALTER ATTRIBUTE \"" + attrName + "\" TYPE " + sourceDataType + ";\n");
+                    typeCommands.append("ALTER TYPE ").append(typeName).append(" ALTER ATTRIBUTE \"").append(attrName).append("\" TYPE ").append(sourceDataType).append(";\n");
                 }
             }
         }
 
-        // Check for dropped ATTRIBUTE in the source
         for (String attrName : targetAttributes.keySet()) {
             if (!sourceAttributes.containsKey(attrName)) {
-                sqlCommands.put(typeName, "ALTER TYPE " + typeName + " DROP ATTRIBUTE \"" + attrName + "\";\n");
+                typeCommands.append("ALTER TYPE ").append(typeName).append(" DROP ATTRIBUTE \"").append(attrName).append("\";\n");
             }
         }
     }
@@ -69,9 +72,7 @@ public class ScriptGenerator {
         Map<String, String> attributes = new HashMap<>();
         String[] parts = typeDefinition.split(", ");
         for (String part : parts) {
-            // Filter out the placeholder attributes like "pg.dropped.*"
             if (!part.contains("pg.dropped.")) {
-                // Extract attribute name and type
                 String[] attrParts = part.split(" ", 2);
                 if (attrParts.length == 2) {
                     attributes.put(attrParts[0].replace("\"", ""), attrParts[1]);
@@ -92,4 +93,5 @@ public class ScriptGenerator {
         }
         return sb.toString();
     }
+
 }
