@@ -1,0 +1,217 @@
+{
+    "devGSPTenant": {
+		"sourceClient": {
+			"host": "103.158.108.17",
+			"port": 5432,
+			"database": "1_CygnetGSPTenant_1",
+			"user": "CygGSPDBA",
+			"password": "Admin#321"
+		},
+		"targetClient": {
+			"host": "103.158.108.18",
+			"port": 5432,
+			"database": "1_CygnetGSPTenant_1",
+			"user": "CygGSPDBA",
+			"password": "th3dB@1sh3r3"
+		},
+        "schemaCompare": {
+            "namespaces": [
+                "Logging",
+                "api",
+                "archive",
+                "audit",
+                "common",
+                "einvoice",
+                "ewaybill",
+                "gl",
+                "gst",
+                "import",
+                "isd",
+                "jobwork",
+                "litigation",
+                "notice",
+                "oregular",
+                "report",
+                "subscriber",
+                "tcs",
+                "tds"
+            ]
+        }
+		
+	},
+    "devGSPMaster": {
+		"sourceClient": {
+			"host": "103.158.108.17",
+			"port": 5432,
+			"database": "CygnetGSPMaster",
+			"user": "CygGSPDBA",
+			"password": "Admin#321"
+		},
+		"targetClient": {
+			"host": "103.158.108.18",
+			"port": 5432,
+			"database": "CygnetGSPMaster",
+			"user": "CygGSPDBA",
+			"password": "th3dB@1sh3r3"
+		},
+        "schemaCompare": {
+            "namespaces": [
+                "archive",
+                "ap",
+                "app",
+                "audit",
+                "common",
+                "dct",
+                "master",
+                "subscriber"
+            ]
+        }
+		
+	},
+    "devGSPAppdata": {
+		"sourceClient": {
+			"host": "103.158.108.17",
+			"port": 5432,
+			"database": "CygnetGSPAppData",
+			"user": "CygGSPDBA",
+			"password": "Admin#321"
+		},
+		"targetClient": {
+			"host": "103.158.108.18",
+			"port": 5432,
+			"database": "CygnetGSPAppData",
+			"user": "CygGSPDBA",
+			"password": "th3dB@1sh3r3"
+		},
+        "schemaCompare": {
+            "namespaces": [
+                "archive",
+                "ap",
+                "app",
+                "audit",
+                "common",
+                "dct",
+                "master",
+                "subscriber"
+            ]
+        }
+		
+	},
+    "devGSPLog": {
+		"sourceClient": {
+			"host": "103.158.108.17",
+			"port": 5432,
+			"database": "CygnetGSPLog",
+			"user": "CygGSPDBA",
+			"password": "Admin#321"
+		},
+		"targetClient": {
+			"host": "103.158.108.18",
+			"port": 5432,
+			"database": "CygnetGSPLog",
+			"user": "CygGSPDBA",
+			"password": "th3dB@1sh3r3"
+		},
+        "schemaCompare": {
+            "namespaces": [
+                "archive",
+                "ap",
+                "app",
+                "audit",
+                "common",
+                "dct",
+                "master",
+                "subscriber"
+            ]
+        }
+		
+	},
+    "devGSPMetadata": {
+		"sourceClient": {
+			"host": "103.158.108.17",
+			"port": 5432,
+			"database": "CygnetGSPMetadata",
+			"user": "CygGSPDBA",
+			"password": "Admin#321"
+		},
+		"targetClient": {
+			"host": "103.158.108.18",
+			"port": 5432,
+			"database": "CygnetGSPMetadata",
+			"user": "CygGSPDBA",
+			"password": "th3dB@1sh3r3"
+		},
+        "schemaCompare": {
+            "namespaces": [
+                "archive",
+                "ap",
+                "app",
+                "audit",
+                "common",
+                "dct",
+                "master",
+                "subscriber"
+            ]
+        }
+		
+	},
+    "devGSPAdmin": {
+		"sourceClient": {
+			"host": "103.158.108.17",
+			"port": 5432,
+			"database": "CygnetGSPAdmin",
+			"user": "CygGSPDBA",
+			"password": "Admin#321"
+		},
+		"targetClient": {
+			"host": "103.158.108.18",
+			"port": 5432,
+			"database": "CygnetGSPAdmin",
+			"user": "CygGSPDBA",
+			"password": "th3dB@1sh3r3"
+		},
+        "schemaCompare": {
+            "namespaces": [
+                "archive",
+                "ap",
+                "app",
+                "audit",
+                "common",
+                "dct",
+                "master",
+                "subscriber"
+            ]
+        }
+		
+	},
+    "devGSPArchival": {
+		"sourceClient": {
+			"host": "103.158.108.17",
+			"port": 5432,
+			"database": "1_CygnetGSPArchival_1",
+			"user": "CygGSPDBA",
+			"password": "Admin#321"
+		},
+		"targetClient": {
+			"host": "103.158.108.18",
+			"port": 5432,
+			"database": "1_CygnetGSPArchival_1",
+			"user": "CygGSPDBA",
+			"password": "th3dB@1sh3r3"
+		},
+        "schemaCompare": {
+            "namespaces": [
+                "archive",
+                "ap",
+                "app",
+                "audit",
+                "common",
+                "dct",
+                "master",
+                "subscriber"
+            ]
+        }
+		
+	}
+
+}
