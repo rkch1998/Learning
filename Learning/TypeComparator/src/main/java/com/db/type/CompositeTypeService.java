@@ -109,7 +109,7 @@ public class CompositeTypeService {
                 if (targetDataSource != null) {
                     DatabaseUtil.closeDataSource(targetDataSource);
                 }
-                DatabaseUtil.closeSshTunnel();
+                // DatabaseUtil.closeSshTunnel();
             }
         });
     }
