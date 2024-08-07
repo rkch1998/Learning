@@ -40,8 +40,8 @@ public class FunctionProcessor {
                 String[] result = parseFunction(line);
                 if (result.length == 2) {
                     String schema = result[0];
-                    // System.out.println("Result from ParseFunction : "+ schema +"."+result[1]);
-                    String functionName = result[1];
+                    System.out.println("Result from ParseFunction : "+ schema +"."+result[1]);
+                    String functionName = result[1].replaceAll("\"", "");
                     String queryResult = queryFormation.executeQuery(dbName, schema, functionName);
                     if (queryResult != null) {
                         if ("pg".equals(profile)) {
@@ -72,7 +72,7 @@ public class FunctionProcessor {
     }
 
     private String[] parseFunction(String function) {
-        String regex = "[(){}<>\\[\\]]";
+        String regex = "[(){}<>\\[\\]]\"";
         function = function.replaceAll(regex, "");
         return function.split("\\.");
     }
