@@ -9,8 +9,7 @@ import java.sql.SQLException;
 
 public class DatabaseUtil {
 
-    private static final int LOCAL_PORT = 5433; 
-    private static SshTunnelUtil sshTunnelUtil = new SshTunnelUtil();
+    // private static SshTunnel sshTunnelUtil = new SshTunnel();
 
     public static DataSource createDataSource(JsonNode clientConfig) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -22,21 +21,15 @@ public class DatabaseUtil {
         String user = clientConfig.path("user").asText();
         String password = clientConfig.path("password").asText();
 
-        if (clientConfig.path("is_ssh_required").asBoolean(false)) {
-            String sshHost = clientConfig.path("ssh_host").asText();
-            int sshPort = clientConfig.path("ssh_port").asInt();
-            String sshUser = clientConfig.path("ssh_username").asText();
-            String sshPrivateKey = clientConfig.path("ssh_private_key").asText();
-
-            try {
-                sshTunnelUtil.setupSshTunnel(sshHost, sshPort, sshUser, sshPrivateKey, host, port, LOCAL_PORT);
-                host = "localhost";
-                port = LOCAL_PORT;
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException("Failed to setup SSH tunnel", e);
-            }
-        }
+        // if (clientConfig.path("is_ssh_required").asBoolean(false)) {
+            
+        //     try {
+        //         SshTunnelUtil.setupSshTunnel(clientConfig);
+        //     } catch (Exception e) {
+        //         e.printStackTrace();
+        //         throw new RuntimeException("Failed to setup SSH tunnel again", e);
+        //     }
+        // }
 
         dataSource.setUrl(String.format("jdbc:postgresql://%s:%d/%s", host, port, database));
         dataSource.setUsername(user);
@@ -58,8 +51,8 @@ public class DatabaseUtil {
         }
     }
 
-    public static void closeSshTunnel() {
-        sshTunnelUtil.closeSshTunnel();
-    }
+    // public static void closeSshTunnel() {
+    //     sshTunnelUtil.closeSshTunnel();
+    // }
 
 }
