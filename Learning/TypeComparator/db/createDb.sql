@@ -1,0 +1,7 @@
+DROP DATABASE practice;
+
+CREATE DATABASE practice;
+
+DROP DATABASE practice2;
+
+CREATE DATABASE practice2;

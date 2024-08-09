@@ -3,6 +3,7 @@ package com.db;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +24,10 @@ public class Application implements CommandLineRunner {
     private ApplicationArguments args;
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication app = new SpringApplication(Application.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        app.run(args);
+        // SpringApplication.run(Application.class, args);
     }
 
     @Override

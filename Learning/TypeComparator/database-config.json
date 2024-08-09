@@ -1,4 +1,30 @@
 {
+	"sample" : {
+		"Practice": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "localhost",
+				"port": 5432,
+				"database": "practice",
+				"user": "postgres",
+				"password": "postgres"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "localhost",
+				"port": 5432,
+				"database": "practice2",
+				"user": "postgres",
+				"password": "postgres"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"public"
+				]
+			}
+			
+		}
+	},
 	"fe" : {
 		"tenant": {
 			"sourceClient": {
@@ -15,7 +41,7 @@
 				"port": 5432,
 				"database": "1_CygnetGSPTenant_1",
 				"user": "CygGSPDBA",
-				"pass": "th3dB@1sh3r3"
+				"password": "th3dB@1sh3r3"
 			},
 			"schemaCompare": {
 				"namespaces": [
@@ -209,6 +235,237 @@
 			"targetClient": {
 				"is_ssh_required": false,
 				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "1_CygnetGSPArchival_1",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
+		}
+
+	},
+	"qa" : {
+		"tenant": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "1_CygnetGSPTenant_1",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.19",
+				"port": 5432,
+				"database": "1_CygnetGSPTenant_1",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"Logging",
+					"api",
+					"archive",
+					"audit",
+					"common",
+					"einvoice",
+					"ewaybill",
+					"gl",
+					"gst",
+					"import",
+					"isd",
+					"jobwork",
+					"litigation",
+					"notice",
+					"oregular",
+					"report",
+					"subscriber",
+					"tcs",
+					"tds"
+				]
+			}
+			
+		},
+		"master": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPMaster",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.19",
+				"port": 5432,
+				"database": "CygnetGSPMaster",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
+		},
+		"appdata": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPAppData",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.19",
+				"port": 5432,
+				"database": "CygnetGSPAppData",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
+		},
+		"log": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPLog",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.19",
+				"port": 5432,
+				"database": "CygnetGSPLog",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
+		},
+		"metadata": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPMetadata",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.19",
+				"port": 5432,
+				"database": "CygnetGSPMetadata",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
+		},
+		"admin": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "CygnetGSPAdmin",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.19",
+				"port": 5432,
+				"database": "CygnetGSPAdmin",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"schemaCompare": {
+				"namespaces": [
+					"archive",
+					"ap",
+					"app",
+					"audit",
+					"common",
+					"dct",
+					"master",
+					"subscriber"
+				]
+			}
+			
+		},
+		"archival": {
+			"sourceClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.18",
+				"port": 5432,
+				"database": "1_CygnetGSPArchival_1",
+				"user": "CygGSPDBA",
+				"password": "th3dB@1sh3r3"
+			},
+			"targetClient": {
+				"is_ssh_required": false,
+				"host": "103.158.108.19",
 				"port": 5432,
 				"database": "1_CygnetGSPArchival_1",
 				"user": "CygGSPDBA",
