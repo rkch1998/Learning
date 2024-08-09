@@ -1,16 +1,16 @@
 package com.db.type;
 
 import com.db.config.DatabaseUtil;
+import com.db.format.FormatFactory;
 import com.db.util.FileWriter;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.sql.DataSource;
 
 @Service
 public class CompositeTypeService {
@@ -19,7 +19,7 @@ public class CompositeTypeService {
     private JsonNode config;
 
     @Autowired
-    private ScriptGenerator scriptGenerator;
+    private FormatFactory formatFactory;
 
     @Autowired
     private FileWriter fileWriter;
@@ -87,13 +87,43 @@ public class CompositeTypeService {
                     Map<String, String> sourceCompositeTypes = getCompositeTypes(sourceJdbcTemplate, schemaName);
                     Map<String, String> targetCompositeTypes = getCompositeTypes(targetJdbcTemplate, schemaName);
 
-                    // Compare types and generate SQL commands
-                    Map<String, String> commands = scriptGenerator.compareTypes(sourceCompositeTypes, targetCompositeTypes);
+                    for (Map.Entry<String, String> entry : sourceCompositeTypes.entrySet()) {
+                        String typeName = entry.getKey();
+                        // System.out.println(typeName);
+                        String sourceTypeDef = entry.getValue();
 
-                    // Append commands to the aggregated SQL
-                    for (String command : commands.values()) {
-                        sqlCommands.append(command).append("\n");
+                        if (!targetCompositeTypes.containsKey(typeName)) {
+                            // Create new type
+                            sqlCommands.append(formatFactory.getTypeFormat("create", schemaName, typeName, sourceTypeDef)).append("\n");
+                        } else if (!sourceTypeDef.equals(targetCompositeTypes.get(typeName))) {
+                            // Compare attributes
+                            Map<String, String> sourceAttributes = extractAttributesWithTypes(sourceTypeDef);
+                            Map<String, String> targetAttributes = extractAttributesWithTypes(targetCompositeTypes.get(typeName));
+
+                            for (Map.Entry<String, String> attrEntry : sourceAttributes.entrySet()) {
+                                String attrName = attrEntry.getKey();
+                                String sourceDataType = attrEntry.getValue();
+
+                                if (!targetAttributes.containsKey(attrName)) {
+                                    sqlCommands.append(formatFactory.addAttributeFormat(schemaName, typeName, attrName, sourceDataType)).append("\n");
+                                } else if (!sourceDataType.equals(targetAttributes.get(attrName))) {
+                                    sqlCommands.append(formatFactory.alterAttributeFormat(schemaName, typeName, attrName, sourceDataType)).append("\n");
+                                }
+                            }
+
+                            for (String attrName : targetAttributes.keySet()) {
+                                if (!sourceAttributes.containsKey(attrName)) {
+                                    sqlCommands.append(formatFactory.dropAttributeFormat(schemaName, typeName, attrName)).append("\n");
+                                }
+                            }
+                        }
                     }
+
+                    targetCompositeTypes.forEach((typeName, targetTypeDef) -> {
+                        if (!sourceCompositeTypes.containsKey(typeName)) {
+                            sqlCommands.append(formatFactory.getTypeFormat("drop", schemaName, typeName, targetTypeDef)).append("\n");
+                        }
+                    });
                 }
 
                 // Write all schema changes for this database to a single file
@@ -113,4 +143,30 @@ public class CompositeTypeService {
             }
         });
     }
+
+    private Map<String, String> extractAttributesWithTypes(String typeDefinition) {
+        Map<String, String> attributes = new HashMap<>();
+        String[] parts = typeDefinition.split(", ");
+        for (String part : parts) {
+            if (!part.contains("pg.dropped.")) {
+                String[] attrParts = part.split(" ", 2);
+                if (attrParts.length == 2) {
+                    attributes.put(attrParts[0].replace("\"", ""), attrParts[1]);
+                }
+            }
+        }
+        return attributes;
+    }
+
+    // private String formatAttributes(String typeDefinition) {
+    //     StringBuilder sb = new StringBuilder();
+    //     for (String attr : extractAttributesWithTypes(typeDefinition).keySet()) {
+    //         if (sb.length() > 0) {
+    //             sb.append(", ");
+    //         }
+    //         String attrType = extractAttributesWithTypes(typeDefinition).get(attr);
+    //         sb.append("\"").append(attr).append("\" ").append(attrType);
+    //     }
+    //     return sb.toString();
+    // }
 }

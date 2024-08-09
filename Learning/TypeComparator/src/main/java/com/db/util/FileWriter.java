@@ -25,7 +25,7 @@ public class FileWriter {
     public String generateOutputFileName(String dbName) {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String outputFileName = String.format("%s_%s.sql", dbName, timestamp);
-        System.out.println("Output file path: " + outputFileName);
+        // System.out.println("Output file path: " + outputFileName);
         return outputFileName;
         
     }
