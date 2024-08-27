@@ -1,0 +1,15 @@
+{
+    "pg": {
+        "postgres": {
+            "url": "jdbc:postgresql://localhost:5432/postgres",
+            "username": "postgres"
+        }
+    },
+    "sql": {
+        "tenant": {
+            "url": "jdbc:sqlserver://localhost:1433;databaseName=tenant",
+            "username": "tenant_user",
+            "password": "tenant_password"
+        }
+    }
+}
