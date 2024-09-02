@@ -1,0 +1,139 @@
+Contains Duplicate
+
+public class Nums{
+public boolean ContainsDuplicate(int[] arr){
+	Set<Integer> set = new HashSet<>();
+		for(int k = 0; k<arr.length; k++){
+			if(!set.add(num){
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
+TWO SUM
+
+public class TwoSum{
+	public int TwoSumFromArray(int[] nums, int target}{
+		int[] result = new int[2];
+		for(int i = 0; i<nums.length; i++){
+			int res = target - nums[i];
+			for(int j = 1+1; j<nums.length; j++){
+				if(res == nums[j]){
+					return[0] = i;
+					return[1] = j;
+				}
+			}
+		}
+		return result;
+		
+		HashMap<Integer, Integer> map = new HashMap<>();
+		for(int i = 0; i< nums.length; i++){
+			int res = target - nums[i];
+			if(map.containsKey(res)){
+				return new int[]{map.get(res), i);
+			}
+			map.put(nums[i], i);
+		}
+		return new int[0];
+	}
+}
+
+Best time to buy and Sell Stock
+public class BuyStock{
+	public int maxProfit(int[] prices){
+		int maxProfit = 0;
+        int buy = prices[0];
+        for(int price : prices){
+            if(buy > price){
+                buy = price;
+            }else if(price - buy > maxProfit){
+                maxProfit = price - buy;
+            }
+        }
+        return maxProfit;
+	}
+}
+
+
+Product of Array Except Self
+
+public class ProductOfArray{
+	public int[] product(int[] nums){
+		int[] ans = new int[nums.length];
+		int prefix = 1;
+		for(int i = 0; i < nums.length; i++){
+			ans[i] = prefix;
+			prefix *= nums[i];
+		}
+		int sufix = 1;
+		for(int i = nums.length-1; i >= 0; i--){
+			ans[i] *= sufix;
+			sufix *= nums[i];
+		}
+		return ans;
+	}
+}
+
+Maximum Subarray (Kadane's Algorithm)
+
+public class Solution{
+	public int maxSubarray(int[] nums){
+		int maxSofar = nums[0];
+		int maxSubArray = nums[0];
+		for(int i = 1; i< nums.length; i++){
+			maxSubArray = Math.max(nums[i], maxSubArray+nums[i];
+			maxSofar = Math.max(maxSofar, maxSubArray);
+		} 
+		return maxSofar;
+	}
+}
+
+Maximum product of subarray
+
+public class Solution{
+	public int MaxProduct(int[] nums){
+		int maxProd = nums[0];
+		int minProd = nums[0];
+		int result = maxProd;
+		
+		for(int i = 1; i<nums.length; i++){
+			int curr = nums[i];
+			if(curr < 0){
+				int temp = maxProd;
+				maxProd = minProd;
+				minProd = temp;
+			}
+			
+			maxProd = Math.max(curr, maxProd * curr);
+			minProd = Math.min(curr, minProd * curr);
+			
+			result = Math.max(result, maxProd);
+		}
+		
+		return result;
+	}
+}
+
+public int maxSubArray(int[] nums){
+	int maxSoFar = nums[0];
+	int maxSubArray = nums[0];
+	for(int i = 0; i < nums.length; i++){
+		maxSubArray = Math.max(nums[i], maxSubArray + nums[i]);
+		maxSoFar = Math.max(maxSoFar, maxSubArray);
+	}
+	return maxSoFar;
+}
+
+
+public int MaxSubArray(int[] nums){
+	int maxSoFar = nums[0];
+	int maxSubArray = nums[0];
+	for(int num : nums){
+		maxSubArray = Math.max(num, maxSubArray+num);
+		maxSoFar = Math.max(maxSoFar, maxSubArray);
+	}
+	return maxSoFar;
+}
+
