@@ -1,0 +1,31 @@
+{
+	"local" : {
+		"sample" : {
+			"Practice": {
+				"sourceClient": {
+					"is_ssh_required": false,
+					"host": "localhost",
+					"port": 5432,
+					"database": "practice",
+					"user": "postgres",
+					"password": "postgres"
+				},
+				"targetClient": {
+					"is_ssh_required": false,
+					"host": "localhost",
+					"port": 5432,
+					"database": "practice2",
+					"user": "postgres",
+					"password": "postgres"
+				},
+				"schemaCompare": {
+					"namespaces": [
+						"public"
+					]
+				}
+				
+			}
+		}
+	}
+	
+}
