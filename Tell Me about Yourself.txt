@@ -60,3 +60,28 @@ Differentiation:
 
 Call to Action:
 "I'd love to bring my expertise to your esteemed organization and contribute to delivering impactful solutions."
+
+
+Explain your Resume?
+
+Introduction: "My name is Ravi Chauhan, currently working as a Software Technologist at Cygnet.one 
+		with over 3 years of experience in software development, focusing on Java, SQL, and database management."
+
+Profile Summary: "I'm a dedicated professional with expertise in developing and optimizing software solutions, 
+		particularly in Java and SQL. My experience in automating processes and improving database performance aligns well with this role."
+
+Professional Experience: "At Cygnet.one, I developed and deployed modules that significantly improved database performance. 
+		For instance, I led a project that involved migrating over 800 stored procedures from SQL Server to PostgreSQL, 
+		reducing migration errors by 30% and optimizing query performance, cutting processing time from 30 minutes to 10 seconds."
+
+Skills: "My core skills include Java, Spring Boot, PostgreSQL, and REST APIs. I have also worked with ETL processes and 
+		the KNIME Analytics Platform, contributing to high-accuracy data projects and performance optimization."
+
+Projects: "A key project I led was FunctionExtraction, where I developed a tool to automate the retrieval of database 
+		functions, reducing manual search time by 80%, which was crucial for accelerating hotfix processes in production."
+
+Education and Certifications: "I hold a degree in Computer Science from Mumbai University with a CGPI of 7.13. 
+		I'm also a certified KNIME Analytics Platform Professional, which has enhanced my data processing and ETL pipeline expertise."
+
+Conclusion: "I'm eager to bring my experience in software development and data engineering to your team, 
+		where I can contribute effectively to your projects and drive impactful results."
