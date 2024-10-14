@@ -1,0 +1,130 @@
+Tell me about your self.
+
+Sure, 
+I'm Ravi Chauhan, a Software Technologist at Cygnet.one, 
+passionate about optimizing and developing 
+high-performance software solutions.
+With 3 years of experience, I've honed my skills in Java, 
+SQL, Spring Boot, REST APIs, and Unit Testing. 
+In my current role, I've developed and optimized numerous 
+functions and procedures, focusing on debugging 
+and performance improvement. My work consistently involves 
+connecting and extracting crucial data from databases.
+
+I graduated from Mumbai University in 2020 with a 7.13 CGPI. 
+Throughout my career, I've tackled various 
+projects, including a recent one where I used Java and SQL 
+to extract procedures and functions from a 
+database and write them to a file. This project sharpened my 
+technical skills and deepened my integration expertise.
+
+My hands-on experience in production environments, coupled with 
+a strong focus on performance optimization, 
+sets me apart as a candidate ready to tackle complex challenges.
+
+I'd love to bring my expertise to your esteemed organization 
+and contribute to delivering impactful solutions.
+
+
+What is your notice period? Can you join immediately?
+
+I am currently employed and my notice period is 60 days. While this is the standard notice period 
+required by my current employer, I am committed to making the transition as smooth as possible. 
+I am flexible and willing to discuss how we can best align my start date with your needs.
+
+Reason for leaving:
+
+I am looking to further my career by taking 
+on new challenges and opportunities for growth. 
+While I have learned a great deal in my current 
+role, I believe that a new environment will allow 
+me to apply my skills in more diverse ways, 
+particularly in areas that align with my long-term 
+career goals, which is backend development. 
+I am excited about the prospect of contributing to 
+your team and continuing my professional development.
+
+
+Why should we hire you?
+You should hire me because I bring a strong foundation in Java development, specifically with hands-on 
+experience in using Java 11+ with Spring Boot and Spring Data. I've successfully delivered projects that 
+required me to develop, maintain, and optimize Java-based applications. My problem-solving skills have 
+been sharpened through real-world challenges, such as integrating complex data operations and ensuring 
+seamless performance in high-demand environments.
+
+My commitment to continuous learning and improvement, combined with a passion for delivering high-quality 
+software solutions, makes me a strong candidate for this position. I am confident that my technical expertise, 
+along with my dedication to team collaboration and innovation, will add significant value to your team.
+
+Can you start working on/pick up a new tech stack as per out requirements?
+
+Absolutely. I'm confident in my ability to quickly 
+learn and adapt to new technologies. I've successfully 
+picked up and mastered new tech stacks in the past, 
+and I’m eager to do the same to meet your requirements. 
+I believe that being adaptable and continuously learning 
+is crucial in the tech industry, 
+and I’m excited about the opportunity to expand my skill 
+set in alignment with your needs.
+
+What is your current CTC and expaected CTC?
+
+My current CTC is 5.2LPA . Based on my skills, 
+experience, and the industry standards, I am looking 
+for a CTC in the range of 9LPA to 11LPA. 
+However, I am open to discussion and flexible based on 
+the overall benefits and opportunities for growth.
+
+
+Where do you see yourself in next 5 years?
+
+In the next five years, I see myself growing both technically and professionally. 
+I aim to deepen my expertise in Java as Backend Developer, take on more 
+leadership responsibilities, and contribute to larger, more complex projects. 
+I also envision myself mentoring junior team members and helping shape the 
+strategic direction of the team or company. 
+Ultimately, I want to be in a position where I can make a significant impact 
+on the business, driving innovation and efficiency while continuing to learn 
+and evolve in my career.
+
+Elevator Pitch
+
+Hook:
+"Hi, I'm Ravi Chauhan, a Software Technologist at Cygnet.one, passionate about developing and optimizing high-performance software solutions."
+
+Value:
+"With 3 years of experience, I've honed my skills in Java, SQL, Spring Boot, REST APIs, and Unit Testing. In my current role, I've developed and optimized numerous functions and procedures, focusing on debugging and performance improvement. My work consistently involves connecting and extracting crucial data from databases."
+
+Evidence:
+"I graduated from Mumbai University in 2020 with a 7.13 CGPI. Throughout my career, I've tackled various projects, including a recent one where I used Java and SQL to extract procedures and functions from a database and write them to a file. This project sharpened my technical skills and deepened my integration expertise."
+
+Differentiation:
+"My hands-on experience in production environments, coupled with a strong focus on performance optimization, sets me apart as a candidate ready to tackle complex challenges."
+
+Call to Action:
+"I'd love to bring my expertise to your esteemed organization and contribute to delivering impactful solutions."
+
+
+Explain your Resume?
+
+Introduction: "My name is Ravi Chauhan, currently working as a Software Technologist at Cygnet.one 
+		with over 3 years of experience in software development, focusing on Java, SQL, and database management."
+
+Profile Summary: "I'm a dedicated professional with expertise in developing and optimizing software solutions, 
+		particularly in Java and SQL. My experience in automating processes and improving database performance aligns well with this role."
+
+Professional Experience: "At Cygnet.one, I developed and deployed modules that significantly improved database performance. 
+		For instance, I led a project that  involved migrating over 800 stored procedures from SQL Server to PostgreSQL, 
+		reducing migration errors by 30% and optimizing query performance, cutting processing time from 30 minutes to 10 seconds."
+
+Skills: "My core skills include Java, Spring Boot, PostgreSQL, and REST APIs. I have also worked with ETL processes and 
+		the KNIME Analytics Platform, contributing to high-accuracy data projects and performance optimization."
+
+Projects: "A key project I led was FunctionExtraction, where I developed a tool to automate the retrieval of database 
+		functions, reducing manual search time by 80%, which was crucial for accelerating hotfix processes in production."
+
+Education and Certifications: "I hold a degree in Computer Science from Mumbai University with a CGPI of 7.13. 
+		I'm also a certified KNIME Analytics Platform Professional, which has enhanced my data processing and ETL pipeline expertise."
+
+Conclusion: "I'm eager to bring my experience in software development and data engineering to your team, 
+		where I can contribute effectively to your projects and drive impactful results."

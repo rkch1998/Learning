@@ -1,0 +1,81 @@
+Entities:
+	1.device
+		i. 	Four Device
+		ii.	Ten Device
+	2.music
+		i.	Free
+		ii.	Personal
+		iii.Premium
+	3.podcast
+		i.	Free
+		ii.	Personal
+		iii.Premium
+	4.video
+		i.	Free
+		ii.	Personal
+		iii.Premium
+	5.subscription
+	5.DoReMiSubscription
+
+dto:
+	1. RenewalAmountDto
+	2. RenewalReminderDto
+
+enums:
+	1. DeviceType
+		i.	TEN_DEVICE
+		ii.	FOUR_DEVICE
+	2. SubscriptionCategory
+		i.	MUSIC
+		ii.	VIDEO
+		iii.PODCAST
+	3. SubscriptionPlan
+		i.	FREE
+		ii.	PERSONAL
+		iii.PREMIUM
+	4. SubscriptionStatus
+		i.	NOT_STARTED
+		ii.	STARTED
+		iii.ADDED
+	5. TopUpStatus
+		i.	EMPTY
+		ii.	ADDED
+
+exceptions:
+	1.AddSubscriptionFailedException
+	2.AddTopUpFailedException
+	3.InvalidDateException
+	4.NoSuchCommandException
+	5.SubscriptionInvalidTypeException
+	6.SubscriptionNotFoundException
+
+services:
+	1. IRenewalService
+	2. ISubscriptionService
+	3. RenewalService
+	4. SubscriptionService
+	
+commands
+	1.AddSubscriptionCommand
+	2.AddTopUpCommand
+	3.CommandInvoker
+	4.ICommand
+	5.PrintRenewalDetailsCommand
+	6.StartSubscriptionCommand
+config
+	1.ApplicationConfig
+constants
+	1.Constants
+	
+App.java
+
+FI		-6265
+HDFC	-4612
+SBI		-4382
+KOTAk	-3600
+NSDL	-0766
+TOTAL	-19625
+
+To be duducted
+		Gas	 	   - 0850
+		Light Bill - 1500

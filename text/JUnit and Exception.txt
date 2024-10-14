@@ -1,0 +1,281 @@
+Custom Exception
+
+1.A custom exception, also known as a user-defined exception, 
+	an exception that you define in your Java code to handle 
+	specific error conditions that are not covered by built-in 
+	exceptions. 
+2.Creating custom exceptions allows you to add more context to 
+	the error messages and handle exceptional situations that are 
+	specific to your application domain.
+	
+3.Define a Custom Exception Class:
+	* Create a new class that extends either Exception (for checked exceptions) 
+		or RuntimeException (for unchecked exceptions).
+	* Implement constructors to provide flexibility in initializing the exception 
+		with custom error messages or additional information.
+4.Throw the Custom Exception:
+	* Use the throw keyword to throw an instance of your custom exception 
+		when a specific error condition occurs in your code.
+	* Provide a meaningful error message or additional context to aid in 
+		debugging and troubleshooting.
+5.Handle the Custom Exception:
+	* Catch the custom exception using a try-catch block wherever the method 
+		that throws the exception is called.
+
+
+Explain the difference between checked and unchecked exceptions?
+
+* An exception in Java is an event that occurs during the execution of a program, 
+	disrupting the normal flow of instructions.
+* Exceptions represent abnormal or unexpected conditions that require special 
+	handling to ensure the smooth execution of the program.
+	
+* Checked exceptions are checked at compile-time, meaning the compiler ensures 
+	that they are either caught using a try-catch block or declared in the 
+	method signature using the throws keyword.
+
+* Unchecked exceptions are not checked at compile-time, meaning the compiler 
+	does not enforce any handling requirements for them.
+	
+* Checked exceptions must be either caught using a try-catch block or declared 
+	in the method signature using the throws keyword.
+* The compiler enforces this requirement to ensure that potential errors are 
+	not ignored and are handled appropriately by the developer.
+
+* Unchecked exceptions do not need to be caught or declared in the method signature.
+* They are not checked by the compiler at compile time, allowing them to propagate up 
+	the call stack until they are caught or cause the program to terminate.
+	
+* Examples of checked exceptions include IOException, SQLException, and ClassNotFoundException.
+
+* Examples of unchecked exceptions include NullPointerException, ClassCastException,
+	ArrayIndexOutOfBoundsException.
+	
+Why does a finally block execute even after a return statement in the try block?
+
+* In Java, the finally block is used to define cleanup code that should be executed regardless 
+	of whether an exception occurs in the try block or not.
+* This ensures that resources are properly released, even if an exception is thrown or caught 
+	within the try block. The finally block executes after the try block completes its 
+	execution, whether normally or due to an exception, and before control is transferred 
+	to the caller.
+	
+* The reason why a finally block executes even after a return statement in the try block is 
+	because the finally block is designed to always execute, irrespective of how the try block 
+	exits.
+
+* Cleanup: The purpose of the finally block is to perform cleanup operations, such as 
+				releasing resources, closing files, or releasing locks, which need to 
+				be executed regardless of how the try block exits (whether by normal 
+				completion, an exception, or a return statement).
+* Exception Handling: If an exception is thrown in the try block and caught by a catch 
+						block, the finally block still executes after the catch block 
+						completes its execution. This ensures that cleanup operations 
+						are performed even if an exception occurs.
+						
+
+What is try-catch-finally block in Java?
+
+* In Java, the try-catch-finally block is used for exception handling.
+* It allows developers to write code that handles exceptional conditions 
+	gracefully and ensures proper cleanup of resources, regardless of 
+	whether an exception occurs or not. 
+* The try-catch-finally block consists of three main components:
+	1. try Block:
+		* The try block contains the code that may potentially throw an exception.
+		* It is the block where the program attempts to execute the potentially risky code.
+		* If an exception occurs within the try block, control is transferred to the 
+			corresponding catch block.
+	2. catch Block(s):
+		* The catch block(s) follow the try block and specify how to handle different 
+			types of exceptions that may occur.
+		* Each catch block is associated with a specific type of exception, allowing 
+			the program to handle different exceptions differently.
+		* If an exception of the corresponding type is thrown within the try block, 
+			control is transferred to the corresponding catch block for handling.
+	3. finally Block:
+		* The finally block follows the catch block(s) (if present) and contains code 
+			that should be executed regardless of whether an exception occurs or not.
+		* It is typically used for cleanup operations, such as closing files, releasing 
+			resources, or releasing locks.
+		* The finally block executes even if an exception is thrown and caught, and even 
+			if a return, break, or continue statement is encountered within the try or 
+			catch blocks.
+			
+
+How do you handle exceptions when working with Java's Stream API?
+
+* When working with Java's Stream API, exceptions can occur during 
+	the processing of elements in the stream. Handling exceptions 
+	in Stream operations requires careful consideration to ensure 
+	that exceptions are appropriately caught, handled, or propagated.
+	
+* Using try-catch Inside Stream Operations:
+	* You can use a try-catch block inside the stream's map, flatMap, forEach, 
+		or other intermediate or terminal operations to catch exceptions locally.
+	* This approach allows you to handle exceptions for each element individually, 
+		but it may lead to verbose code.
+	* Verbose Code:
+		- Verbose code refers to code that is unnecessarily long, wordy, or 
+			complicated, often containing redundant or repetitive elements 
+			that make it difficult to read, understand, and maintain. 
+		- Verbose code tends to lack clarity, conciseness, and simplicity, 
+			making it harder for developers to comprehend and debug.
+
+* Exception Propagation:
+	* You can catch exceptions locally and rethrow them as unchecked exceptions, 
+		such as RuntimeExceptions, using the throw keyword.
+	* This approach propagates exceptions to the caller, allowing them to handle 
+		or propagate the exceptions further up the call stack.
+		
+* Handling Exceptions in Stream Collectors:
+	* When collecting stream elements into a collection, you can use a custom 
+		Collector that handles exceptions during the accumulation process.
+	* This approach allows you to encapsulate exception handling logic within 
+		the Collector, providing a cleaner and more reusable solution.
+		
+* Using Optional to Handle Exceptions:
+	* When transforming stream elements, you can use the map operation followed 
+		by map or flatMap to convert elements to Optional and handle exceptions.
+		
+		
+How do you test private methods or members of a class in JUnit?
+
+* Testing private methods or members of a class in JUnit can be challenging because 
+	JUnit is designed to test the public API of classes. 
+* However, there are several approaches you can use to test private methods or members 
+	indirectly:
+	* Refactor the Code:
+		* If possible, refactor the code to make the private methods or members 
+			package-private or protected instead of private. 
+		* This allows them to be accessed by test classes in the same package or 
+			subclasses, respectively.
+	* Use Reflection:
+		* You can use Java's Reflection API to access and invoke private methods or members. 
+		* While this approach is powerful, it is also more complex and may be less efficient.
+	* Testing via Public Methods:
+		* Test the behavior of the private methods indirectly by testing the public methods 
+			that call them. 
+		* If the public methods exhibit the expected behavior, it implies that the private 
+			methods are functioning correctly.
+	* Extract Private Methods to Separate Classes:
+		* If the private methods contain significant logic that warrants testing, consider 
+			refactoring them into separate classes with package-private or protected visibility. 
+		* You can then test these classes directly.
+	* Testability Improvements:
+		* Aim to write testable code from the beginning by focusing on encapsulation, 
+			dependency injection, and separation of concerns. 
+		* This reduces the need to test private methods directly.
+		
+How do you check if a test method throws an Exception in JUnit?
+
+* In JUnit, you can use annotations and assertions to check if a test method throws an exception. 
+* There are multiple ways to achieve this, depending on the version of JUnit we are using and 
+	specific requirements.
+
+* Using @Test Annotation with expected Attribute (JUnit 4):
+	* In JUnit 4, you can use the @Test annotation's expected attribute to specify the 
+		expected exception that should be thrown by the test method. 
+	* If the test method throws the specified exception or its subtype, the test passes.	
+	
+* Using @Test Annotation with assertThrows Method (JUnit 5):
+	* In JUnit 5, you can use the assertThrows method from the Assertions class to assert 
+		that a specific exception is thrown by the test method. 
+	* This method takes the expected exception type and a Executable lambda representing 
+		the code that should throw the exception.
+
+* Using Try-Catch Block (JUnit 4 or JUnit 5):
+	* You can also use a try-catch block within the test method to catch the exception and 
+		then use assertions to verify its type and message.
+		
+		
+Explain the difference between using Mockito.spy() and Mockito.mock() methods.
+
+* Mockito.spy() and Mockito.mock() are both methods provided by the Mockito framework 
+	for creating test doubles (mocks) of objects in unit tests. 
+* However, they serve different purposes and behave differently.
+
+* Mockito.mock() is used to create a mock object of a class or interface. 
+* Mock objects are fake implementations of the original class or interface, 
+	used to simulate behavior for testing purposes.
+	
+* Mockito.spy() is used to create a spy object of a real object. 
+* Spy objects are partially mock objects that delegate calls to the real methods of 
+	the original object, but allow you to stub or verify specific methods as needed.
+	
+* When you mock an object using Mockito.mock(), Mockito creates a lightweight proxy 
+	object that simulates the behavior of the original class or interface. 
+* By default, all methods of the mock object return default values (null for objects, 
+	0 for primitives, and false for booleans).
+	
+* When you spy on an object using Mockito.spy(), Mockito creates a proxy object that 
+	wraps the original object. 
+* Calls to the spy object delegate to the real methods of the original object unless 
+	stubbed otherwise. 
+* You can use Mockito's stubbing and verification features on spy objects.
+
+* You typically use Mockito.mock() to replace dependencies of the class under test, 
+	allowing you to isolate the class and focus on testing its behavior in isolation.
+*You typically use Mockito.spy() when you want to test the behavior of a real object 
+	but need to modify or verify specific methods. 
+* Spy objects are useful for testing legacy code or classes with complex dependencies.
+
+
+What are the limitations of using Mockito, and how do you work around them?
+
+* While Mockito is a powerful and versatile mocking framework for Java unit testing, 
+	it has certain limitations.
+	
+	1. Inability to Mock Static Methods and Final Classes:
+	Limitation: 
+		* Mockito cannot mock static methods or final classes, as it relies on runtime code 
+			generation and dynamic proxies, which do not support mocking static methods or 
+			final classes.
+	Workaround:
+		* Extract the static or final methods into separate non-static or non-final methods 
+			within a class, then mock the non-static/non-final methods.
+		* Use a different mocking library such as PowerMock or JMockit, which offer support 
+			for mocking static methods and final classes.
+			
+	2. Limited Support for Mocking Private Methods:
+	Limitation: 
+		* Mockito does not directly support mocking private methods, as it promotes the 
+			testing of behavior rather than implementation details. It only allows spying 
+			on real objects, which may call private methods.
+	Workaround:
+		* Refactor the code to make private methods package-private or protected, allowing 
+			them to be tested indirectly through public methods.
+		* Use reflection to access and invoke private methods for testing purposes, although 
+			this approach may be more complex and less maintainable.
+			
+	3. Inability to Mock Final or Static Fields:
+	Limitation: 
+		* Mockito cannot mock final or static fields, as it operates at the method level and 
+			does not support field mocking.
+	Workaround:
+		* Refactor the code to use dependency injection to provide final or static fields as 
+			constructor or setter parameters, allowing them to be replaced with mock objects 
+			during testing.
+		* Use a different mocking library such as PowerMock or JMockit, which offer support 
+			for mocking final or static fields.
+			
+	4. Limited Support for Mocking Enums:
+	Limitation: 
+		* Mockito does not directly support mocking enums, as enums are final by default and 
+			Mockito cannot mock final classes.
+	Workaround:
+		* Use a different approach to handle enum dependencies, such as using dependency 
+			injection or refactoring the code to use interfaces or abstract classes instead of enums.
+		* If necessary, consider using a different mocking library or using static utility 
+			methods instead of enum instances.
+			
+	5. Difficulty in Mocking Constructors:
+	Limitation: 
+		* Mockito does not provide direct support for mocking constructors, as it focuses on 
+			method-level mocking rather than object creation.
+	Workaround:
+		* Refactor the code to use dependency injection and constructor injection to provide 
+			dependencies to classes under test, allowing them to be replaced with mock objects 
+			during testing.
+		* Consider using a different mocking library or using PowerMock or JMockit, which offer 
+			support for mocking constructors and object instantiation.

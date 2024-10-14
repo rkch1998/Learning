@@ -4,8 +4,6 @@ import java.util.Map;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +62,7 @@ public class App implements CommandLineRunner {
 		String content;
 		try {
 			content = new String(Files.readAllBytes(Paths.get(inputFilePath)));
-			String transformedSql = transformSqlQuery(content, arguments);
+			String transformedSql = getFun.transformSqlQuery(content, arguments);
 			// System.out.println(transformedSql);
 			fileArchive.moveToArchive();
 			fileWriter.writeToFile(transformedSql, dbName);
@@ -76,50 +74,5 @@ public class App implements CommandLineRunner {
         // shutdown
         System.exit(SpringApplication.exit(context, () -> 0));
 	}
-
-	public String transformSqlQuery(String sql, Map<String, String> arguments) {
-		for (Map.Entry<String, String> entry : arguments.entrySet()) {
-			String argumentName = entry.getKey();
-			String dataType = entry.getValue();
-	
-			// Regex to match the argument with or without array/JSON structure
-			String regex = String.format("%s=>(\\{.*?\\}|\\[.*?\\]|'[^']*'|[^,\\)]+)", argumentName);
-			Pattern pattern = Pattern.compile(regex);
-			Matcher matcher = pattern.matcher(sql);
-	
-			while (matcher.find()) {
-				String matchedValue = matcher.group(1);
-				// System.out.println("machedValue: "+matchedValue);
-				String replacement;
-	
-				// Check if the matched value is an array or JSON structure (starts with '[')
-				if ((matchedValue.startsWith("[{") && matchedValue.endsWith("}]"))) {
-					// Wrap the matched value with ARRAY and apply the data type casting
-					String dtype = dataType.replaceAll("\\[\\]", "");
-					// System.out.println("True");
-					replacement = String.format("%s=>ARRAY(SELECT json_populate_recordset(null ::%s,'%s'))", argumentName, dtype, matchedValue);
-				} else if((matchedValue.startsWith("{") && matchedValue.endsWith("}"))){
-					replacement = String.format("%s=>(SELECT json_populate_recordset(null ::%s,'[%s]'))", argumentName, dataType, matchedValue);
-				} 
-				else if (matchedValue.startsWith("[") && matchedValue.endsWith("]")) {
-					// Wrap the matched value with ARRAY and apply the data type casting
-					replacement = String.format("%s=>ARRAY%s::%s", argumentName, matchedValue, dataType);
-				} else if (matchedValue.startsWith("'") && matchedValue.endsWith("'")) {
-					// Remove the surrounding single quotes for proper SQL syntax
-					matchedValue = matchedValue.substring(1, matchedValue.length() - 1);
-					// Apply the data type casting as VARCHAR
-					replacement = String.format("%s=>'%s'::VARCHAR", argumentName, matchedValue);
-				} else {
-					// Apply the data type casting without ARRAY
-					replacement = String.format("%s=>%s::%s", argumentName, matchedValue, dataType);
-				}
-	
-				// Replace the original argument with the transformed value
-				sql = sql.replace(matcher.group(0), replacement);
-			}
-		}
-		return sql;
-	}
-	
 }
 

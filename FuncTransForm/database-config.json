@@ -1,15 +1,16 @@
 {
     "pg": {
-        "postgres": {
+        "tenant": {
             "url": "jdbc:postgresql://localhost:5432/postgres",
-            "username": "postgres"
+            "username": "username",
+            "password": "password"
         }
     },
     "sql": {
         "tenant": {
-            "url": "jdbc:sqlserver://localhost:1433;databaseName=tenant",
-            "username": "tenant_user",
-            "password": "tenant_password"
+            "url": "jdbc:sqlserver://localhost:1433;databaseName=practice;trustServerCertificate=true;DB_CLOSE_DELAY=-1",
+            "username": "username",
+            "password": "password"
         }
     }
 }

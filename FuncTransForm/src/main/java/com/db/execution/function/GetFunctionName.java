@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,7 @@ public class GetFunctionName {
                 while (resultSet.next()) {
                     String[] splitArgs = resultSet.getString("fun_args").split(",");
                     for (String arg : splitArgs) {
-                        String[] argPair = arg.trim().split(" ");
+                        String[] argPair = arg.trim().split(" ", 2);
                         argsMap.put(argPair[0], argPair[1]);
                     }
                 }
@@ -89,33 +91,74 @@ public class GetFunctionName {
             throw new IllegalArgumentException("Function name not found in the provided SQL string.");
         }
 	}
-    
-    public Map<String, String> parseArguments(ResultSet resultSet) throws SQLException {
-        Map<String, String> argsMap = new HashMap<>();
-        Pattern pattern = Pattern.compile("(\\w+)=>([^,]+?)::(\\w+|character varying|character|smallint|integer|boolean|numeric|text|timestamp|date|json|jsonb|ARRAY\\w+|ARRAY\\w+\\[])");
 
-        while (resultSet.next()) {
-            String funArgs = resultSet.getString("fun_args");
+    public String transformSqlQuery(String sql, Map<String, String> arguments) {
+		for (Map.Entry<String, String> entry : arguments.entrySet()) {
+			String argumentName = entry.getKey();
+			String dataType = entry.getValue();
+	
+			// Regex to match the argument with or without array/JSON structure
+			String regex = String.format("%s=>(\\{.*?\\}|\\[.*?\\]|'''(.*?)'''|'[^']*'|[^,\\)]+)", argumentName);
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(sql);
+	
+			while (matcher.find()) {
+				String matchedValue = matcher.group(1);
+				// System.out.println("machedValue: "+matchedValue);
+				String replacement;
+	
+				// Check if the matched value is an array or JSON structure (starts with '[')
+				if ((matchedValue.startsWith("[{") && matchedValue.endsWith("}]"))) {
+					// Wrap the matched value with ARRAY and apply the data type casting
+					String dtype = dataType.replaceAll("\\[\\]", "");
+					// System.out.println("True");
+					replacement = String.format("%s=>ARRAY(SELECT json_populate_recordset(null ::%s,'%s'))", argumentName, dtype, matchedValue);
+				} else if((matchedValue.startsWith("{") && matchedValue.endsWith("}"))){
+					replacement = String.format("%s=>(SELECT json_populate_recordset(null ::%s,'[%s]'))", argumentName, dataType, matchedValue);
+				} 
+				else if (matchedValue.startsWith("[") && matchedValue.endsWith("]")) {
+					// Wrap the matched value with ARRAY and apply the data type casting
+					replacement = String.format("%s=>ARRAY%s::%s", argumentName, matchedValue, dataType);
+				} else if (matchedValue.startsWith("'") && matchedValue.endsWith("'")) {
+                    //checking for date possibility
+                    if(matchedValue.contains("-")){
+                        //converting date format from 'dd-MM-yyyy' to 'yyyy-MM-dd'
+                        matchedValue = dateTimeFormat(matchedValue);
+                        //// Apply the data type casting as TIMESTAMP WITHOUT TIME ZONE
+                        replacement = String.format("%s=>'%s'::TIMESTAMP WITHOUT TIME ZONE", argumentName, matchedValue);
+                    }else{
+                        // Remove the surrounding single quotes for proper SQL syntax
+                        matchedValue = matchedValue.substring(1, matchedValue.length() - 1);
+                        // Apply the data type casting as VARCHAR
+                        replacement = String.format("%s=>'%s'::VARCHAR", argumentName, matchedValue);
+                    }
+				} else {
+					// Apply the data type casting without ARRAY
+					replacement = String.format("%s=>%s::%s", argumentName, matchedValue, dataType);
+				}
+	
+				// Replace the original argument with the transformed value
+				sql = sql.replace(matcher.group(0), replacement);
+			}
+		}
+		return sql;
+	}
 
-            // Use a Matcher to find all matches for the pattern
-            Matcher matcher = pattern.matcher(funArgs);
-
-            while (matcher.find()) {
-                String argName = matcher.group(1).trim();
-                String argValue = matcher.group(2).trim();
-                String dataType = matcher.group(3).trim();
-
-                // Remove any leading or trailing quotes from the value if it's a string
-                if (dataType.equals("character varying") || dataType.equals("character")) {
-                    argValue = argValue.replaceAll("^'(.*)'$", "$1"); // Remove single quotes
-                }
-
-                // Store the argument and its type in the map
-                argsMap.put(argName, dataType);
-            }
-        }
-
-        return argsMap;
+    private static String dateTimeFormat(String input){
+        //input format for datetime
+        input = input.replace("'", "");
+        System.out.println(input);
+        
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss.SSSSSS");
+        //casting input string into datetime as input format 
+        LocalDateTime date = LocalDateTime.parse(input, inputFormat);
+        //setting output format
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        // formatting the String from 'dd-MM-yyyy HH:mm:ss.SSSSSS' to 'yyyy-MM-dd HH:mm:ss.SSSSSS'
+        String formattedDate = date.format(outputFormat);
+        //Returning the formatted date 
+        return formattedDate;
     }
+	
 }   
 
