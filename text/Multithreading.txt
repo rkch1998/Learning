@@ -1,0 +1,116 @@
+Q. Explain the difference between processes and threads.
+	A process is an instance of a program being executed with its own memory space and resources. 
+	Threads are lightweight subprocesses of a process that share the same memory and resources, allowing for concurrent tasks and improved performance. 
+	Java supports thread creation and management through the Thread class, and processes communicate through inter-process communication (IPC).
+	
+	Memory usage: Processes have their own separate memory space, which can be useful for isolating different parts of an 
+			application and preventing bugs and security issues. However, this also means that data cannot be shared 
+			between processes without explicit communication mechanisms. 
+			Threads, on the other hand, share the same 
+			memory space and can easily access and modify shared data, but this can also lead to data race and synchronization issues.
+			
+	System resource allocation: Each process has its own system resources, such as file handles and network connections, 
+			which are not shared with other processes. 
+			Threads share the same system resources as the parent process, 
+			which can improve efficiency and reduce overhead, but also requires careful management to prevent resource 
+			conflicts and contention.
+			
+	Parallelism and concurrency: Processes can run completely independently of each other, allowing for true parallelism on 
+			multi-core machines. 
+			Threads run within the same process and share the same CPU time, which can provide 
+			concurrency but not necessarily true parallelism. 
+
+	
+Q. What is the lifecycle of a thread in Java? Explain the different states.
+	The thread lifecycle is an essential concept in multithreaded programming, and understanding it is crucial for building 
+		efficient and responsive applications. By managing the lifecycle of threads, developers can control the execution 
+		of concurrent tasks within an application and improve performance by allowing multiple threads to execute concurrently.
+	
+	The lifecycle of a thread in Java refers to the various states a thread can be in during its execution. 
+		The following are some different states of a thread:
+		
+	1) New: A thread is in this state when it has been created but has not yet started running. 
+			The thread is not yet eligible to be scheduled by the operating system.
+			
+	2) Runnable: A thread is in this state when it has been started and is ready to run, but may not be currently executing. 
+				The thread is eligible to be scheduled by the operating system.
+				
+	3) Running: A thread is in this state when the operating system has selected it to run on a CPU core. 
+				The thread is executing its code.
+				
+	4)Blocked: A thread is in this state when it is waiting for a specific event, such as I/O input or a lock on a shared resource, 
+				to occur before it can continue running. The thread is not eligible to be scheduled by the operating system 
+				until the event occurs.
+				
+	5) Waiting: A thread is in this state when it is waiting indefinitely for a specific event, such as a notification from another thread. 
+				The thread is not eligible to be scheduled by the operating system until the event occurs.
+				
+	6)Timed Waiting: A thread is in this state when it is waiting for a specific event, but with a timeout specified. 
+				The thread is not eligible to be scheduled by the operating system until the event occurs or the timeout expires.
+
+
+	The thread lifecycle is used in various ways in Java multithreaded programming. 
+		Here are some examples of how it can be used:
+
+	Parallelism: By creating multiple threads and managing their lifecycle, developers can achieve true parallelism in their applications. 
+
+	Resource sharing: Managing the lifecycle of threads can be used to allow multiple threads to share the same resources, 
+			such as files or network connections, without conflicts or data race conditions. By properly synchronizing 
+			access to shared resources, developers can ensure that multiple threads can access the same resource without 
+			causing errors or data corruption.
+
+
+Q. What are the different ways to create a thread in Java? 
+	There are two main ways to create a thread in Java:
+	Extending the Thread class: To create a thread by extending the Thread class, a new class is created that extends 
+				the Thread class and overrides its run() method. The run() method contains the code that will be 
+				executed in the new thread. Once the new class is created, an instance of it is created, and the 
+				start() method is called on it to start the new thread.
+				
+	Implementing the Runnable interface: To create a thread by implementing the Runnable interface, a new class is created 
+				that implements the Runnable interface and defines its run() method. The run() method contains the code 
+				that will be executed in the new thread. Once the new class is created, an instance of it is created, 
+				and the start() method of a new Thread object is called with the instance of the Runnable class passed 
+				as an argument to start the new thread.
+
+
+	While creating threads in Java, it is important to keep the following best practices and potential pitfalls in mind:
+	
+	Resource consumption: Creating too many threads can result in excessive resource consumption and may cause performance degradation or 
+			even system failure. It is important to manage the number of threads created and reuse threads whenever possible, 
+			such as by using thread pools.
+			
+	Synchronization: When multiple threads access shared resources, such as variables or data structures, synchronization is 
+			necessary to prevent data corruption or inconsistent results.. Failure to properly synchronize can result in 
+			hard-to-debug issues such as deadlocks or data corruption.
+
+
+
+
+Q. What is the difference between the Runnable interface and the Thread class in Java?
+	The Runnable interface defines the run() method, allowing a class to define the code to be executed in a new thread. 
+	The Thread class provides methods to create, manage and control threads. 
+	By using these constructs, developers can create and manage threads in Java applications to achieve concurrency and improve performance. 
+
+	1) Code reusability: The Runnable interface allows for greater code reusability than the Thread class. 
+					By implementing the Runnable interface, a class can be used to create multiple threads, 
+					and the same class can be used to implement different tasks for different threads. 
+					In contrast, extending the Thread class creates a new class each time a new thread is created.
+					
+	2) Flexibility: The Runnable interface provides greater flexibility than the Thread class. 
+					By implementing the Runnable interface, a class can be used in a wider variety of contexts 
+					beyond just creating threads, such as in executor frameworks or in conjunction with other 
+					concurrency constructs like locks or semaphores. 
+					In contrast, the Thread class is primarily designed for creating and managing threads.
+					
+	3) Execution context: The Thread class provides an execution context for the thread, while the Runnable interface does not. 
+					When a new thread is created using the Thread class, it has its own execution context that can be managed 
+					and controlled using methods provided by the Thread class. In contrast, when a new thread is created 
+					using the Runnable interface, it does not have its own execution context and must be executed within the 
+					context of another thread or executor framework. 
+
+
+
+	
+	
+	

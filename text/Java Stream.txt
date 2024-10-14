@@ -1,0 +1,140 @@
+
+Q. What is a Java Stream? Give an example of how you would use a Java Stream. 
+	Streams provide a more concise and readable way of writing code for processing collections of data. 
+	They allow developers to write code in a declarative style that expresses what should be done with the data rather than how it should be done. 
+	Let's say we have a list of integers and we want to find the sum of all the even numbers in the list.
+
+	This is how the becomes concise and readable.
+	int sum = ListOfNumbers.stream()
+                .filter(num -> num % 2 == 0)
+                .mapToInt(Integer::intValue)
+                .sum();
+
+	filter operation to select only the even numbers, mapToInt to convert them to primitive int values, 
+	and sum to add them up. This code reads more like a sentence, expressing what we want to do with the 
+	data rather than how we want to do it.
+
+	Streams are evaluated lazily, meaning that they only process the data when necessary. 
+	This can lead to significant performance improvements, as not all data needs to be processed at once.
+
+	Let's say we have a very large collection of numbers, and we want to find the first number that is both greater than 100 and even. 
+	If we want to implement this using stream, we will mainly use filter() and findFirst() operation.
+
+	The filter operation only processes each number one at a time, and the findFirst operation stops processing as soon as it finds a matching number. 
+	This means that if the first number in the list matches the criteria, the rest of the list is never processed. 
+
+	A stream is a sequence of elements that can be processed in parallel or sequentially.
+
+	Streams provide a declarative and functional approach to data processing, where operations are expressed as a series of transformations on the data.                                                                                                                                                                                                                                                             It can be processed in parallel, which means that the data is divided into multiple chunks and processed concurrently on multiple threads.
+
+	Filtering data: Streams can be used to filter data from a collection based on certain conditions. 
+			For example, you can use the filter operation to get all the elements from a collection that meet a certain criteria.
+
+	Sorting data: Streams can be used to sort data in a collection based on certain criteria. 
+			For example, you can use the sorted operation to sort a list of integers in ascending or descending order.
+
+	New stream for each operation:Stream can be used if we want new processed data every time rather than changing the original data.
+
+
+
+Q. What is the difference between a terminal and intermediate operation in Java Streams? Give an example of each.
+	Intermediate operations are operations that transform a stream into another stream. 
+		They are lazy, meaning that they don't produce any result until a terminal operation is called. 
+		
+	Intermediate operations include filter(), map(), sorted(), distinct(), and many others.
+	
+	Terminal operations are operations that produce a result or a side effect. 
+		They trigger the processing of intermediate operations and the production of a result or a side effect. 
+		
+	Terminal operations include collect(), forEach(), count(), reduce(), and many others.
+
+	Return Type: Intermediate operations return another stream, which allows for method chaining to further process the data. 
+				Terminal operations, however, return a non-stream result or perform a side effect, 
+				such as printing to the console or modifying a data source.
+				
+	Multiple Operations: Multiple intermediate operations can be chained together to form a pipeline of operations that are 
+				executed when a terminal operation is called. However, once a terminal operation is called, the stream 
+				cannot be used again, and a new stream must be created to perform further operations.
+				
+	Ordering: Intermediate operations can be ordered, meaning that the order in which they are called affects the final result. 
+			For example, calling filter() before map() produces a different result than calling map() before filter(). 
+			Terminal operations, however, do not depend on the order of intermediate operations.
+
+
+Q. How can you achieve parallelism using Java Streams? What are the potential benefits and drawbacks of doing so? 
+	Data Processing: When processing large amounts of data, parallelism can be used to split up the processing across 
+			multiple threads, resulting in faster execution times. For example, when processing a large dataset of 
+			images or videos, parallelism can be used to apply image processing or video analysis algorithms to 
+			each image or frame in parallel.
+			
+	Search and Filtering: Parallelism can be beneficial when searching or filtering a large dataset for specific items. 
+			For example, when searching a large dataset of customer transactions for fraudulent activity, parallelism 
+			can be used to search for patterns in the data across multiple threads.
+
+	In Java Streams, parallelism can be achieved using the parallelStream() method. 
+	
+	This method is used to convert a sequential stream into a parallel stream, allowing the processing to 
+		be split up across multiple threads.
+		
+	Parallelism in Java Streams offers several benefits, including faster processing of large datasets, increased 
+		efficiency, and simplified code. By utilizing multiple threads, parallelism can split up workloads and make 
+		more efficient use of available computing resources. 
+		
+	However, parallelism also introduces additional complexity, such as the need to handle thread synchronization 
+		and ensure that operations are executed in the correct order. This can lead to increased complexity and 
+		performance overhead, and parallelism can consume significant computing resources, especially when processing large datasets.
+
+	Let’s say, we want to find the sum of 10 numbers stored in the List parallelly.
+	
+		numbersList.parallelStream().reduce(0, (a, b) -> a + b);
+		
+	To achieve parallelism, we use the parallelStream() method instead of stream(), which converts the sequential stream into a 
+		parallel stream, reduce() method to calculate the sum of the numbers in the list.
+		
+	Machine learning applications that need to process large datasets or perform complex operations can benefit from parallelism 
+		in Java Streams to speed up training and improve performance.
+		
+	Image and video processing tasks, such as filtering or resizing images or videos, can be computationally intensive and benefit 
+	from parallelism in Java Streams to speed up processing times.
+
+
+
+Q. Can you explain how to utilize the Stream API to perform operations on a collection?
+	Create a collection: First, create a collection such as a List, Set, or Map that contains the data you want to process. 
+		It is necessary because the Stream API operates on collections. 
+		
+	If we want to perform filtering on the collection to find only even numbers then first, we need to create a collection for that.
+		e.g. List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+		
+	Create a stream: Once we have a collection containing the data to process, we can create a stream from it using the stream() 
+		(for normal operations) or parallelStream() (for parallel operations) method. 
+		This will allow you to perform operations on the collection efficiently using the Stream API. 
+		
+	We can create a stream from this List using the stream() method.
+			Stream<Integer> numberStream = numbers.stream();
+		
+	Chain intermediate operations: With a stream, you can chain multiple intermediate operations together to transform, 
+						filter, or sort the data. Some common intermediate operations include map(), filter(), sorted(), and distinct(). 
+						These operations return a new stream each time they are called.
+						
+	Now, we can perform various operations on this stream. For example, we can filter out even numbers using the filter() method.
+			Stream<Integer> evenNumberStream = numberStream.filter(n -> n % 2 == 0);
+			
+	Apply a terminal operation: After you have performed all the necessary intermediate operations, you can apply a terminal 
+				operation to the stream to produce a final result. Examples of terminal operations 
+				include forEach(), reduce(), collect(), and toArray().
+				
+	Finally, we can collect the results of our operations using the collect() method.
+			List<Integer> evenNumbersList = evenStream.collect(Collectors.toList());
+
+
+	Object creation: Stream operations such as map() or filter() can create a large number of new objects, which can lead to 
+			excessive memory usage and slow down processing. It is important to be aware of the object creation 
+			overhead and choose the right approach based on the data size and processing requirements.
+			
+	Exception handling: Stream operations can throw unchecked exceptions, which can be difficult to handle and debug. 
+				It is important to handle exceptions properly and gracefully to avoid unexpected behavior and 
+				improve the reliability of the code.
+
+
+	
