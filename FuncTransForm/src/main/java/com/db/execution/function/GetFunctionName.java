@@ -11,13 +11,12 @@ import java.util.regex.Pattern;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.db.execution.config.AppConfig;
+import com.db.execution.util.DateTimeFormat;
 
 @Component
 public class GetFunctionName {
@@ -42,19 +41,19 @@ public class GetFunctionName {
 
         Map<String, String> argsMap = new HashMap<>();
         String[] strArray = functionName.split("\\.");
-        String query = "SELECT n.nspname, p.proname, " +
-               "pg_catalog.pg_get_function_identity_arguments(p.oid) AS fun_args " +
-               "FROM pg_catalog.pg_proc p " +
-               "JOIN pg_catalog.pg_namespace n ON n.oid = p.pronamespace " +
-               "WHERE n.nspname = ? AND p.proname = ? " +
-               "ORDER BY 1";
+        // String query = "SELECT n.nspname, p.proname, " +
+        //        "pg_catalog.pg_get_function_identity_arguments(p.oid) AS fun_args " +
+        //        "FROM pg_catalog.pg_proc p " +
+        //        "JOIN pg_catalog.pg_namespace n ON n.oid = p.pronamespace " +
+        //        "WHERE n.nspname = ? AND p.proname = ? " +
+        //        "ORDER BY 1";
         // System.out.println("Query: "+query);
         Connection connection = appConfig.getConnection(dbName);
         if (connection == null) {
             return null;
         }
         
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(Query.query)) {
             
             statement.setString(1, strArray[0]);
             statement.setString(2, strArray[1]);
@@ -123,9 +122,17 @@ public class GetFunctionName {
                     //checking for date possibility
                     if(matchedValue.contains("-")){
                         //converting date format from 'dd-MM-yyyy' to 'yyyy-MM-dd'
-                        matchedValue = dateTimeFormat(matchedValue);
-                        //// Apply the data type casting as TIMESTAMP WITHOUT TIME ZONE
-                        replacement = String.format("%s=>'%s'::TIMESTAMP WITHOUT TIME ZONE", argumentName, matchedValue);
+                        String formattedDate = DateTimeFormat.dateTimeFormat(matchedValue);
+
+                        //If date convertion is successful, apply TIMESTAMP casting
+                        if(formattedDate != null){
+                            // Apply the data type casting as TIMESTAMP WITHOUT TIME ZONE
+                            replacement = String.format("%s=>'%s'::TIMESTAMP WITHOUT TIME ZONE", argumentName, formattedDate);
+                        } else {
+                            // If date conversion fails, handle it as a normal VARCHAR type
+                            matchedValue = matchedValue.substring(1, matchedValue.length() - 1);
+                            replacement = String.format("%s=>'%s'::VARCHAR", argumentName, matchedValue);
+                        }
                     }else{
                         // Remove the surrounding single quotes for proper SQL syntax
                         matchedValue = matchedValue.substring(1, matchedValue.length() - 1);
@@ -143,22 +150,6 @@ public class GetFunctionName {
 		}
 		return sql;
 	}
-
-    private static String dateTimeFormat(String input){
-        //input format for datetime
-        input = input.replace("'", "");
-        System.out.println(input);
-        
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss.SSSSSS");
-        //casting input string into datetime as input format 
-        LocalDateTime date = LocalDateTime.parse(input, inputFormat);
-        //setting output format
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-        // formatting the String from 'dd-MM-yyyy HH:mm:ss.SSSSSS' to 'yyyy-MM-dd HH:mm:ss.SSSSSS'
-        String formattedDate = date.format(outputFormat);
-        //Returning the formatted date 
-        return formattedDate;
-    }
 	
 }   
 
