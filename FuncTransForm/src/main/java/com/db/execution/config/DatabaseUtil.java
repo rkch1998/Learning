@@ -15,7 +15,6 @@ public class DatabaseUtil {
     @SuppressWarnings("unchecked")
     public DatabaseUtil() {
         String jsonFilePath = System.getProperty("db.credentials.file", "database-config.json");
-        System.out.printf("Trying to connect with database.\n");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             dbConfigs = objectMapper.readValue(new File(jsonFilePath), HashMap.class);
