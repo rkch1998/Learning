@@ -40,6 +40,9 @@ public class GetArguments {
         }
 
         LinkedHashMap<String, String> argsMap = new LinkedHashMap<>();
+
+        functionName = functionName.replace("\"", "");
+    
         String[] strArray = functionName.split("\\.");
         
         Connection connection = appConfig.getConnection(dbName);

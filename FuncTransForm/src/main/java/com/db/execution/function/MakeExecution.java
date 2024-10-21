@@ -41,7 +41,8 @@ public class MakeExecution {
         
         StringBuilder formattedSql = new StringBuilder();
 
-        formattedSql.append("SELECT * FROM ").append(functionName).append("(\n");
+        formattedSql.append("SELECT * FROM ").append(functionName).append(" (\n");
+
 
         int count = 0;
         for(Map.Entry<String, String> entry : arguments.entrySet()){
