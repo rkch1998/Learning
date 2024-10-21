@@ -83,7 +83,7 @@ public class App implements CommandLineRunner {
 			if(LineCounter.countLines(inputFilePath) != 1){	
 				transformedSql = getFun.transformSqlQuery(content, arguments);
 			} else {
-				// System.out.println("Else case");
+
 				functionName = getName.getFunctionName(content);
 				transformedSql = makeExecution.getExecution(functionName, arguments);
 			}

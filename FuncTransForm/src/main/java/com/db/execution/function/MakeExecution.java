@@ -43,6 +43,7 @@ public class MakeExecution {
 
         formattedSql.append("SELECT * FROM ").append(functionName).append(" (\n");
 
+
         int count = 0;
         for(Map.Entry<String, String> entry : arguments.entrySet()){
             String paramName = entry.getKey();
