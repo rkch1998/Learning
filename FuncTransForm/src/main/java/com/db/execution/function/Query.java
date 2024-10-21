@@ -1,5 +1,7 @@
 package com.db.execution.function;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Query {
    static String  query = "SELECT n.nspname, p.proname, " +
                "pg_catalog.pg_get_function_identity_arguments(p.oid) AS fun_args " +
