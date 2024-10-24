@@ -1,4 +1,4 @@
-package com.db.function;
+package com.db.util;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -9,7 +9,7 @@ import java.nio.file.StandardCopyOption;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FileArchive {
+public class Archiver {
 
     public void moveToArchive() {
         try {
@@ -24,7 +24,7 @@ public class FileArchive {
                 for (Path entry : stream) {
                     Path archiveFilePath = archiveDir.resolve(entry.getFileName());
                     Files.move(entry, archiveFilePath, StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println("Moved file to archive: " + archiveFilePath);
+                    System.out.println("Moving files to archive");
                 }
             }
         } catch (IOException e) {

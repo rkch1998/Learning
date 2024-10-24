@@ -1,4 +1,4 @@
-package com.db.function;
+package com.db.util;
 
 import org.springframework.stereotype.Component;
 import java.io.BufferedWriter;
@@ -9,14 +9,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
-public class FunctionWriter {
+public class FileWriter {
 
     public void writeToFile(String content, String dbName) {
         String outputFileName = generateOutputFileName(dbName);
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(outputFileName))) {
-            writer.write(content);
-            writer.newLine();
-            System.out.println("Data written to file successfully!");
+            if(!content.isEmpty()){
+                writer.write(content);
+                writer.newLine();
+                System.out.println("Data written to file successfully!");
+            }else{
+                System.out.println("Function not found...!");
+            }
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }
