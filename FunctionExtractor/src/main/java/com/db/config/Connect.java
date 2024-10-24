@@ -1,18 +1,19 @@
-package com.db.function;
+package com.db.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
 @Component
-public class DatabaseExecutor {
+public class Connect {
 
     @Autowired
-    private DbConfigProperties dbConfigProperties;
+    private Config dbConfigProperties;
 
     @Autowired
     private Environment env;

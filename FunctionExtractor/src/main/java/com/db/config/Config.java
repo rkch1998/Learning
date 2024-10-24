@@ -1,4 +1,4 @@
-package com.db.function;
+package com.db.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class DbConfigProperties {
+public class Config {
 
     private Map<String, Map<String, Map<String, String>>> dbConfigs;
 
     @SuppressWarnings("unchecked")
-    public DbConfigProperties() {
+    public Config() {
         String jsonFilePath = System.getProperty("db.credentials.file", "db_config.json");
-        System.out.printf("Trying to connect with database.\n");
+        System.out.printf("Connecting with database.....\n");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             dbConfigs = objectMapper.readValue(new File(jsonFilePath), HashMap.class);
