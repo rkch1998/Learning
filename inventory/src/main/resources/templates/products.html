@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Product List</h1>
+    
+    <button type="button" onclick="openEditModal()" class="add-btn">+ Add New Product</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="products-table-body">
+
+        </tbody>
+    </table>
+
+    <!-- Product Modal for Create/Edit -->
+    <div id="product-modal">
+        <div>
+            <h2 id="modal-title">Create Product</h2>
+            <form onsubmit="saveProduct(event)">
+                <input type="hidden" id="productId">
+                <label for="productName">Name</label>
+                <input type="text" id="productName" required>
+                <label for="productPrice">Price</label>
+                <input type="number" id="productPrice" required>
+                <button type="submit">Save</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/products.js"></script>
+</body>
+</html>
