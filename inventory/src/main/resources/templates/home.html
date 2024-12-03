@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>IMS</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <h1>Product Management</h1>
+
+    <!-- Button to add a new product -->
+    <button type="button" onclick="openEditModal()" class="add-btn">+ Add New Product</button>
+
+    <!-- Table to display products -->
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.description}"></td>
+                <td class="actions">
+                    <button th:attr="onclick='openEditModal(${product.id}, \'${product.name}\', ${product.price})'">Edit</button>
+                    <button class="delete-btn" th:attr="onclick='deleteProduct(${product.id})'">Delete</button>
+                </td>
+            </tr>
+        </tbody>        
+    </table>
+
+    <h1>Inventory Management</h1>
+
+    <!-- Button to add new inventory -->
+    <button type="button" onclick="openEditModal()" class="add-btn">+ Add New Inventory</button>
+
+    <!-- Table to display inventory -->
+    <table>
+        <thead>
+            <tr>
+                <th>Inventory ID</th>
+                <th>Product ID</th>
+                <th>Stock Quantity</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- You will dynamically insert the inventory data here with Thymeleaf -->
+            <tr th:each="inv : ${inventory}">
+                <td th:text="${inv.id}"></td>
+                <td th:text="${inv.productId}"></td>
+                <td th:text="${inv.stockQuantity}"></td>
+                <td th:text="${inv.location}"></td>
+                <td>
+                    <button th:attr="onclick='openEditModal(${inv.id}, ${inv.productId}, ${inv.stockQuantity}, \'${inv.location}\')'">Edit</button>
+                    <button class="delete-btn" th:attr="onclick='deleteInventory(${inv.id})'">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="/js/inventory.js"></script>
+    <script src="/js/products.js"></script>
+    <footer>
+        © 2024 IMS. All rights reserved.
+    </footer>
+
+</body>
+</html>

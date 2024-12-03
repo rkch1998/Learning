@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Inventory Management</h1>
+    <button type="button" onclick="openEditModal()" class="add-btn">+ Add New Inventory</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product ID</th>
+                <th>Stock Quantity</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="inventory-table-body">
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div id="inventory-modal">
+        <div>
+            <h2 id="modal-title">Create Inventory Item</h2>
+            <form onsubmit="saveInventory(event)">
+                <input type="hidden" id="inventoryId" />
+                <label for="productId">Product ID:</label>
+                <input type="number" id="productId" required />
+                <label for="stockQuantity">Stock Quantity:</label>
+                <input type="number" id="stockQuantity" required />
+                <label for="location">Location:</label>
+                <input type="text" id="location" />
+                <button type="submit">Save</button>
+                <button type="button" class="close-btn" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/inventory.js"></script>
+
+</body>
+</html>
