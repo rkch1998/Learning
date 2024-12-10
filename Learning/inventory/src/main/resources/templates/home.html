@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IMS</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <h1>Welcome to Inventory Management System</h1>
+
+    <div class="tab-buttons">
+        <button class="tab-button active" onclick="showTab('products')">Product Management</button>
+        <button class="tab-button" onclick="showTab('inventory')">Inventory Management</button>
+    </div>
+
+    <!-- Product Management Tab -->
+    <div id="products" class="tab active">
+        <h2>Product Management</h2>
+        <button type="button" onclick="openEditModal()" class="add-btn">+ Add New Product</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Inventory ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="products-table-body">
+                <!-- Product rows will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Inventory Management Tab -->
+    <div id="inventory" class="tab">
+        <h2>Inventory Management</h2>
+        <button type="button" onclick="openEditModal()" class="add-btn">+ Add New Inventory</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Inventory ID</th>
+                    <th>User ID</th>
+                    <th>Inventory Name</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="inventory-table-body">
+                <!-- Inventory rows will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for adding/editing products and inventory -->
+    <div id="modal-overlay" onclick="closeModal()"></div>
+    <div id="inventory-modal" style="display: none;">
+        <form onsubmit="saveInventory(event)">
+            <div><h2 id="modal-title"></h2></div>
+                <input type="hidden" id="inventoryId">
+
+                <!-- User ID -->
+                <label for="userId">User ID</label>
+                <input type="number" id="userId" placeholder="Enter user ID" required />
+
+                <!-- Inventory Name -->
+                <label for="inventoryName">Inventory Name:</label>
+                <input type="text" id="inventoryName" placeholder="Enter inventory name" required />
+
+                <!-- Location -->
+                <label for="location">Location:</label>
+                <input type="text" id="location" placeholder="Enter location" required />
+
+                <button type="submit">Save</button>
+                <button type="button" class="close-btn" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+
+    <script src="/js/inventory.js"></script>
+    <script src="/js/products.js"></script>
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+
+            // Show the selected tab
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`.tab-button[onclick="showTab('${tabName}')"]`).classList.add('active');
+        }
+
+        window.onload = function() {
+            // Initial loading for product and inventory
+            loadProducts();
+            loadInventory();
+        };
+    </script>
+
+    <footer>
+        © 2024 IMS. All rights reserved.
+    </footer>
+
+</body>
+</html>

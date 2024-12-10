@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Product List</h1>
+
+        <!-- Add New Product Button -->
+        <button type="button" onclick="openEditModal()" class="add-btn">+ Add New Product</button>
+
+        <!-- Products Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Inventory ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="products-table-body">
+                <!-- Rows will be dynamically loaded here -->
+            </tbody>
+        </table>
+
+        <!-- Background Overlay -->
+        <div id="modal-overlay" onclick="closeModal()"></div>
+
+        <!-- Product Modal for Create/Edit -->
+        <div id="product-modal">
+            <form onsubmit="saveProduct(event)">
+                <div><h2 id="modal-title">Create Product</h2></div>
+                <input type="hidden" id="productId">
+
+                <!-- Inventory ID -->
+                <label for="inventoryId">Inventory ID</label>
+                <input type="number" id="inventoryId" placeholder="Enter inventory ID" required>
+
+                <!-- Product Name -->
+                <label for="productName">Name</label>
+                <input type="text" id="productName" placeholder="Enter product name" required>
+
+                <!-- Quantity -->
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" placeholder="Enter product quantity" required>
+
+                <!-- Price -->
+                <label for="productPrice">Price</label>
+                <input type="number" id="productPrice" placeholder="Enter product price" required>
+
+                <!-- Description -->
+                <label for="description">Description</label>
+                <input type="text" id="description" placeholder="Enter description" required>
+
+                <!-- Buttons -->
+                <button type="submit">Save</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/products.js"></script>
+</body>
+</html>
