@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="max-width: 100%;">
     <div class="container">
+        <div th:insert="~{layout.html :: content}"></div>
+
         <h1>Product List</h1>
 
         <!-- Add New Product Button -->
@@ -68,5 +72,10 @@
     </div>
 
     <script src="/js/products.js"></script>
+
+    <div th:insert="~{layout.html :: foot}"></div>
+    <!-- <footer class="text-center mt-5">
+        © 2024 IMS. All rights reserved.
+    </footer> -->
 </body>
 </html>

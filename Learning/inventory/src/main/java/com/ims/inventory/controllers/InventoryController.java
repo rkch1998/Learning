@@ -33,6 +33,10 @@ public class InventoryController {
 
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody InventoryDto inventoryDto){
+        // System.out.println("Inventory DTO from controller : "+inventoryDto);
+        if (inventoryDto.getId() != null) {
+            throw new IllegalArgumentException("ID should not be provided when creating a new Inventory.");
+        }
         inventoryService.creatInventory(inventoryDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Inventory created successfuly!");
     }

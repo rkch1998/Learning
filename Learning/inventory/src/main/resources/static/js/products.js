@@ -1,7 +1,6 @@
 async function loadProducts() {
     try {
         const response = await fetch('/api/products');
-        debugger
         if (!response.ok) throw new Error('Failed to fetch products.');
         console.log(response);
         const products = await response.json();
@@ -25,9 +24,13 @@ async function loadProducts() {
                 <td>${product.quantity}</td>
                 <td>${product.price}</td>
                 <td>${product.description}</td>
-                <td>
-                    <button onclick="openEditModal(${product.id}, ${product.inventoryId}, '${product.productName}', ${product.quantity}, ${product.price}, '${product.description}')">Edit</button>
-                    <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
+                <td class="action-buttons">
+                    <button class="icon-btn" onclick="openEditModal(${product.id}, ${product.inventoryId}, '${product.productName}', ${product.quantity}, ${product.price}, '${product.description}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="icon-btn delete-btn" onclick="deleteProduct(${product.id})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </td>
             </tr>`;
         });
@@ -41,6 +44,7 @@ async function loadProducts() {
 
 window.onload = function() {
     loadProducts();
+    document.getElementById('model-overlay').onclick = closeModel;
 };
 
 async function deleteProduct(id) {
@@ -62,7 +66,7 @@ async function deleteProduct(id) {
 }
 
 function openEditModal(id = null, inventoryid = '', name = '', quantity = '', price = '', description = '') {
-    document.getElementById('productId').value = id || 1;
+    document.getElementById('productId').value = id || '';
     document.getElementById('inventoryId').value = inventoryid || '';
     document.getElementById('productName').value = name || '';
     document.getElementById('quantity').value = quantity || '';

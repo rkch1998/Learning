@@ -28,7 +28,10 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody ProductDto productDto){
-        System.out.println("Received Product DTO: " + productDto);
+        // System.out.println("Received Product DTO: " + productDto);
+        if (productDto.getId() != null) {
+            throw new IllegalArgumentException("ID should not be provided when creating a new product.");
+        }
         productService.createProduct(productDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Product created successfuly!");
     }

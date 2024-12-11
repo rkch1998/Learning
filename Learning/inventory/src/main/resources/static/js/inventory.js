@@ -1,30 +1,39 @@
 async function loadInventory() {
     try {
         const response = await fetch('/api/inventory');
-        if (!response.ok) throw new Error('Failed to fetch inventory items.');
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`Failed to fetch inventory items: ${errorMessage}`);
+        }
         const inventory = await response.json();
 
         const tableBody = document.getElementById('inventory-table-body');
-        tableBody.innerHTML = '';
+        let tableRows = '';
 
         inventory.forEach(item => {
-            const row = `<tr>
+            tableRows += `<tr>
                 <td>${item.id}</td>
                 <td>${item.userId}</td>
                 <td>${item.inventoryName}</td>
                 <td>${item.location}</td>
-                <td>
-                    <button onclick="openEditModal(${item.id}, ${item.userId}, '${item.inventoryName}', '${item.location}')">Edit</button>
-                    <button class="delete-btn" onclick="deleteInventory(${item.id})">Delete</button>
+                <td class="action-buttons">
+                    <button class="icon-btn" onclick="openEditModal(${item.id}, ${item.userId}, '${item.inventoryName}', '${item.location}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="icon-btn delete-btn" onclick="deleteInventory(${item.id})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </td>
             </tr>`;
-            tableBody.innerHTML += row;
         });
+
+        tableBody.innerHTML = tableRows;
     } catch (error) {
         console.error('Error loading inventory:', error);
         alert('Failed to load inventory items. Please try again later.');
     }
 }
+
 
 async function deleteInventory(id) {
     const confirmDelete = confirm("Are you sure you want to delete this inventory?");
@@ -56,11 +65,11 @@ function openEditModal(id = null, userid = '', inventoryname = '', location = ''
 async function saveInventory(event) {
     event.preventDefault();
     const id = document.getElementById('inventoryId').value;
-    const userid = document.getElementById('userId').value;
-    const inventoryname = document.getElementById('inventoryName').value;
+    const userId = document.getElementById('userId').value;
+    const inventoryName = document.getElementById('inventoryName').value;
     const location = document.getElementById('location').value;
 
-    const inventory = { userid, inventoryname, location };
+    const inventory = { userId, inventoryName, location };
 
     try {
         if (id) {
@@ -80,11 +89,12 @@ async function saveInventory(event) {
             });
             alert('Inventory item created successfully');
         }
-        closeModal();
         loadInventory();
     } catch (error) {
         console.error('Error saving inventory item:', error);
         alert('Failed to save inventory item. Please try again later.');
+    }finally{
+        closeModal();
     }
 }
 
@@ -92,4 +102,7 @@ function closeModal() {
     document.getElementById('inventory-modal').style.display = 'none';
 }
 
-window.onload = loadInventory;
+window.onload = function(){
+    loadInventory();
+    document.getElementById('model-overlay').onclick = closeModel;
+};

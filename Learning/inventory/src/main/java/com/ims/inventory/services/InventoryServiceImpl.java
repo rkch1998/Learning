@@ -29,6 +29,9 @@ public class InventoryServiceImpl implements InventoryService {
         if(inventoryDto == null){
             return null;
         }
+        if (inventoryDto.getId() != null && inventoryRepository.existsById(inventoryDto.getId())) {
+            throw new IllegalArgumentException("Cannot manually insert an ID that already exists.");
+        }
 
         if (!inventoryRepository.existsById(inventoryDto.getUserId())) {
             throw new RuntimeException("Inventory not found with ID " + inventoryDto.getUserId());

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import com.ims.inventory.dtos.InventoryDto;
 import com.ims.inventory.entities.Inventory;
-import com.ims.inventory.entities.User;
 
 @Component
 public class InvetoryMapperImpl implements InventoryMapper{
@@ -17,12 +16,9 @@ public class InvetoryMapperImpl implements InventoryMapper{
         }
 
         InventoryDto inventoryDto = new InventoryDto();
-
         
-        inventoryDto.setUserId(inventory.getUserId());
-        
-
         inventoryDto.setId(inventory.getId());
+        inventoryDto.setUserId(inventory.getUserId());
         inventoryDto.setInventoryName(inventory.getInventoryName());
         inventoryDto.setLocation(inventory.getLocation());
 
@@ -35,12 +31,11 @@ public class InvetoryMapperImpl implements InventoryMapper{
         if(inventoryDto == null){
             return null;
         }
-
+        
         Inventory inventory = new Inventory();
-        User user = new User();
-        user.setId(inventoryDto.getUserId());
-        inventory.setUserId(user.getId());
+
         inventory.setId(inventoryDto.getId());
+        inventory.setUserId(inventoryDto.getUserId());
         inventory.setInventoryName(inventoryDto.getInventoryName());
         inventory.setLocation(inventoryDto.getLocation());
 
