@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
         if(userDto == null){
             return null;
         }
+
+        if(userDto.getId() != null && userRepository.existsById(userDto.getId())){
+            throw new IllegalArgumentException("Cannot manually insert an ID that already exists.");
+        }
+
         User user = userMapper.toEntity(userDto);
         // System.out.println("UserName "+user.getUsername());
         User savedUser = userRepository.save(user);

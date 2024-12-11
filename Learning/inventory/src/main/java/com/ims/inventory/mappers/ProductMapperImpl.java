@@ -10,7 +10,7 @@ public class ProductMapperImpl implements ProductMapper{
 
     @Override
     public ProductDto toDto(Product product) {
-        System.out.println("Mapping Product to ProductDto: " + product);
+        // System.out.println("Mapping Product to ProductDto: " + product);
         if(product == null){
             return null;
         }
@@ -27,7 +27,7 @@ public class ProductMapperImpl implements ProductMapper{
 
     @Override
     public Product toEntity(ProductDto productDto) {
-        System.out.println("Mapping Product to Product: " + productDto);
+        // System.out.println("Mapping Product to Product: " + productDto);
         if(productDto == null){
             return null;
         }

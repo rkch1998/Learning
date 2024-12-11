@@ -29,8 +29,11 @@ public class ProductServiceImpl implements ProductService{
         if(productDto == null){
             return null;
         }
-        System.out.println("InventoryId : " + productDto.getInventoryId());
-        System.out.println("ProductId : " + productDto.getId());
+        if (productDto.getId() != null && productRepository.existsById(productDto.getId())) {
+            throw new IllegalArgumentException("Cannot manually insert an ID that already exists.");
+        }
+        // System.out.println("InventoryId : " + productDto.getInventoryId());
+        // System.out.println("ProductId : " + productDto.getId());
         if (!inventoryRepository.existsById(productDto.getInventoryId())) {
             throw new RuntimeException("Inventory not found with ID " + productDto.getInventoryId());
         }

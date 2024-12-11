@@ -5,6 +5,9 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 h1 {
@@ -51,6 +54,10 @@ button:hover {
     opacity: 0.8;
 }
 
+.content{
+    flex: 1;
+}
+
 .edit-btn {
     background-color: #007BFF;
     color: white;
@@ -78,10 +85,10 @@ button:hover {
 }
 
 footer {
+    background-color: #f8f9fa;
     text-align: center;
-    margin-top: 20px;
-    font-size: 12px;
-    color: #777;
+    padding: 10px;
+    border-top: 1px solid #dee2e6;
 }
 /* Modal styles */
 #product-modal {
@@ -154,4 +161,70 @@ button[type="button"] {
 }
 button[type="button"]:hover {
     background-color: #c82333;
+}
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.icon-btn i {
+    font-size: 1.2em;
+    color: #555;
+}
+.icon-btn:hover i {
+    color: #000;
+}
+.add-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.add-btn i {
+    font-size: 1.2em;
+}
+.add-btn:hover {
+    background-color: #45a049;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+/* Ensure action buttons are inline */
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+    justify-content: center; /* Center-align buttons in the cell */
+    align-items: center; /* Vertically align buttons */
+}
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.icon-btn i {
+    font-size: 1.2em;
+    color: #555;
+}
+.icon-btn:hover i {
+    color: #000;
 }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
     public final UserService userService;
 
@@ -29,6 +29,9 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody UserDto userDto) {
+        if(userDto.getId() != null){
+            throw new IllegalArgumentException("ID should not be provided when creating a new user.");
+        }
         userService.createUser(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("User has been created.");
     }
