@@ -27,8 +27,9 @@ public class FileWriter {
     }
 
     public String generateOutputFileName(String dbName) {
+        String dbName2 = "1. CygnetGSP" + dbName.substring(0, 1).toUpperCase() + dbName.substring(1) + "-";
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String outputFileName = String.format("%s_%s.sql", dbName, timestamp);
+        String outputFileName = String.format("%s%s.sql", dbName2, timestamp);
         // Path outputFilePath = Path.of(outputFileName);
         System.out.println("Output file path: " + outputFileName);
         return outputFileName;

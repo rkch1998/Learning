@@ -22,7 +22,7 @@ public class QueryExecutor {
              var resultSet = statement.executeQuery()) {
             if (resultSet.next()) {
 
-                return "pg".equals(profile) ? resultSet.getString(1) + ";\n" : resultSet.getString(1);
+                return resultSet.getString(1);
                 
             }
         } catch (SQLException e) {
