@@ -1,10 +1,6 @@
 {
     "pg": {
-        "master": {
-            "url": "jdbc:postgresql://103.158.108.17:7432/CygnetGSPMaster",
-            "username": "CygGSPDBA",
-            "password": "MN6E5pLqhn9E"
-        }
+        
         "postgres": {
             "url": "jdbc:postgresql://localhost:5432/postgres",
             "username": "postgres"

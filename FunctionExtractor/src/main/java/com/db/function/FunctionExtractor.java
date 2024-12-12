@@ -29,6 +29,14 @@ public class FunctionExtractor {
     public void processFunctionsFromFile(String inputFilePath, String dbName, String profile) {
         List<String> results = new ArrayList<>();
 
+        if(!"pg".equals(profile)){
+            results.add("SET ANSI_NULLS ON\r\n" + //
+                                "GO\r\n" + //
+                                "\r\n" + //
+                                "SET QUOTED_IDENTIFIER ON\r\n" + //
+                                "GO\r\n");
+        }
+
         // String profile = env.getProperty("spring.profiles.active");
 
         Connection connection = databaseExecutor.getConnection(dbName);
@@ -54,7 +62,7 @@ public class FunctionExtractor {
                 }
             }
 
-            functionWriter.writeToFile(String.join("\n", results), profile.concat("_" + dbName));
+            functionWriter.writeToFile(String.join("\n", results), dbName);
         } catch (IOException e) {
             System.out.println("Error reading input file: " + e.getMessage());
         } finally {
@@ -67,10 +75,10 @@ public class FunctionExtractor {
             String queryResult) {
         if ("pg".equals(profile)) {
             results.add(String.format("DROP FUNCTION IF EXISTS %s.\"%s\";\n", schema.trim(), functionName.trim()));
-            results.add(queryResult);
+            results.add(String.format("%s;\n", queryResult.trim()));
         } else {
             results.add(String.format("DROP PROCEDURE IF EXISTS [%s].[%s]\nGO\n", schema.trim(), functionName.trim()));
-            results.add(String.format("%s\nGO\n", queryResult));
+            results.add(String.format("%s\nGO\n", queryResult.trim()));
         }
     }
 
