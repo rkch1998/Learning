@@ -1,16 +1,16 @@
 {
     "pg": {
         "master": {
-            "url": "jdbc:postgresql://103.158.108.17:7432/CygnetGSPMaster",
-            "username": "CygGSPDBA",
-            "password": "MN6E5pLqhn9E"
+            "url": "jdbc:postgresql://localhost:5432/postgresql",
+            "username": "postgresql",
+            "password": "postgresql"
         }
     },
     "sql": {
         "master": {
-            "url": "jdbc:sqlserver://103.158.108.18:1433;databaseName=CygnetGSPMaster;trustServerCertificate=true;DB_CLOSE_DELAY=-1",
-            "username": "CygGSPDBA",
-            "password": "th3dB@1sh3r3"
+            "url": "jdbc:sqlserver://localhost:1433;databaseName=postgresql;trustServerCertificate=true;DB_CLOSE_DELAY=-1",
+            "username": "postgresql",
+            "password": "th3dB@postgresql"
         }
     }
 }
