@@ -10,12 +10,17 @@ import com.ims.inventory.dtos.InventoryDto;
 import com.ims.inventory.entities.Inventory;
 import com.ims.inventory.mappers.InventoryMapper;
 import com.ims.inventory.repositories.InventoryRepository;
+import com.ims.inventory.repositories.UserRepository;
 
 @Service
 public class InventoryServiceImpl implements InventoryService {
 
     @Autowired
     public InventoryRepository inventoryRepository;
+
+    @Autowired
+    public UserRepository userRepository;
+
     @Autowired
     public InventoryMapper inventoryMapper;
 
@@ -27,18 +32,19 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public InventoryDto creatInventory(InventoryDto inventoryDto) {
         if(inventoryDto == null){
-            return null;
+            throw new IllegalArgumentException("Inventory data cannot be null.");
         }
         if (inventoryDto.getId() != null && inventoryRepository.existsById(inventoryDto.getId())) {
             throw new IllegalArgumentException("Cannot manually insert an ID that already exists.");
         }
 
-        if (!inventoryRepository.existsById(inventoryDto.getUserId())) {
-            throw new RuntimeException("Inventory not found with ID " + inventoryDto.getUserId());
+        if (!userRepository.existsById(inventoryDto.getUserId())) {
+            throw new RuntimeException("User not found with ID " + inventoryDto.getUserId());
         }
 
         Inventory inventory = inventoryMapper.toEntity(inventoryDto);
         Inventory saveInventory = inventoryRepository.save(inventory);
+        
         return inventoryMapper.toDto(saveInventory);
     }
     
